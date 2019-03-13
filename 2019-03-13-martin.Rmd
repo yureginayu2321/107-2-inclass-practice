@@ -1,0 +1,92 @@
+---
+title: '2019-03-13'
+author: "林茂廷"
+date: "3/13/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Create an object with values
+
+```{r}
+a <- 2
+3 -> b
+```
+
+```{r}
+65 + b
+```
+
+```{r}
+c <- 47
+
+65 + c
+```
+
+```{r}
+c
+```
+
+```{r}
+`c`
+```
+#  When to use `
+
+```{r}
+`107上學期我的平均成績` <- 92
+```
+
+```{r}
+學期107我的平均成績 <- 92
+
+```
+
+```{r}
+`107上學期我的平均成績`
+```
+
+```{r}
+107上學期我的平均成績
+```
+
+# numeric class
+
+```{r}
+class(a)
+```
+
+```{r}
+a<-5
+a2<-5L
+```
+
+```{r}
+class(a)
+```
+
+```{r}
+class(a2)
+```
+
+# vector
+
+```{r}
+aVector<-c(5,6,7)
+a2Vector<-c(5L,6L,7L)
+```
+
+```{r}
+class(a2Vector)
+```
+
+```{r}
+class(aVector)
+```
+
+```{r}
+class(a2Vector)
+```
+
