@@ -1,7 +1,13 @@
 ---
+<<<<<<< HEAD
 title: '2019-03-13'
 author: "林茂廷"
 date: "3/13/2019"
+=======
+title: '2019-03-20'
+author: ""
+date: "3/20/2019"
+>>>>>>> 426a753100080b01413bbba974d18c43211130f9
 output: html_document
 ---
 
@@ -9,6 +15,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+<<<<<<< HEAD
 ## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
@@ -69,3 +76,5 @@ class(aVector)
 class(a2Vector)
 ```
 
+=======
+>>>>>>> 426a753100080b01413bbba974d18c43211130f9
