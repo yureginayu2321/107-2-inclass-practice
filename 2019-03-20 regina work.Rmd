@@ -45,6 +45,35 @@ class(studentMajors)
 ```{r}
 class(studentMajors0)
 ```
+```{r}
+typeof(studentMajors)
+typeof(studentMajors0)
+```
+```{r}
+birthplace <- factor(
+  c("台中市", "台中市", "台北市", "台北市", "台北市")
+)
+typeof(birthplace)
+
+levels(birthplace
+       )
+as.integer(birthplace)
+```
+```{r}
+library(lubridate)
+dtObject <- ymd_hms("1970-01-01 00:02:53") 
+dtObjectVector <- ymd_hms(
+  c("1970-01-01 00:02:53",
+    "1980-02-11 11:25:22")
+)
+class(dtObject)
+dtObject
+typeof(dtObject)
+levels(dtObject)
+as.integer(dtObject)
+as.double(dtObject)
+```
+
 
 
 
