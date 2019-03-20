@@ -23,3 +23,31 @@ dialogue <- c("小明說：'上課要認真。'",
 
 cat(dialogue, sep="\n")
 ```
+
+```{r}
+aLogical <- c(T,TRUE,F,FALSE,FALSE)
+class(aLogical)
+```
+
+```{r}
+studentMajors <- factor(
+  c("歷史系", "經濟系", "法律系")
+)
+```
+```{r}
+studentMajors0 <-  c("歷史系", "經濟系", "法律系")
+
+```
+```{r}
+class(studentMajors)
+```
+
+```{r}
+class(studentMajors0)
+```
+
+
+
+
+
+
