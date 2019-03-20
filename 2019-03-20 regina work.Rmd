@@ -18,8 +18,8 @@ cat(dialogue, sep="\n")
 
 
 ```{r}
-dialogue <- c('小明說："明天不用上課。"',
-               '小花說："真的嗎？"')
+dialogue <- c("小明說：'上課要認真。'",
+               "小花說：'我也覺得'")
 
 cat(dialogue, sep="\n")
 ```
