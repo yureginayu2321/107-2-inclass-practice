@@ -92,5 +92,6 @@ y3 <- c(NA,"小華")
 
 is.na(x2)
 sum(x2)
+sum(x2,na.rm=T)
 ```
 
