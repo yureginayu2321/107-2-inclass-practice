@@ -9,3 +9,140 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r}
+dialogue <- c('小明說："明天不用上課。"',
+               '小花說："真的嗎？"')
+
+cat(dialogue, sep="\n")
+```
+
+```{r}
+dialogue <- c("小明說：'明天不用上課。'",
+               "小花說：'真的嗎？'")
+
+cat(dialogue, sep="\n")
+```
+
+# Logicals
+
+```{r}
+aLogical <- c(T,TRUE,F,FALSE,FALSE)
+class(aLogical)
+```
+
+```{r}
+# 加總向量內的所有元素值。
+sum(aLogical)
+```
+
+# Factor
+
+```{r}
+studentMajors0 <- c("經濟系", "經濟系", "法律系")
+```
+
+
+```{r}
+studentMajors <- factor(
+  c("經濟系", "經濟系", "法律系")
+)
+```
+
+```{r}
+class(studentMajors0)
+```
+
+```{r}
+class(studentMajors)
+```
+
+```{r}
+studentMajors0
+```
+
+```{r}
+studentMajors
+```
+
+```{r}
+typeof(studentMajors)
+```
+
+
+```{r}
+typeof(studentMajors0)
+```
+
+```{r}
+levels(studentMajors)
+```
+
+```{r}
+as.integer(studentMajors)
+```
+
+```{r}
+birthplace <- factor(c('台中','台中','台北','台北','台北'))
+birthplace
+as.integer(birthplace)
+```
+
+```{r}
+birthplace <- factor(
+  c("台北市","台北市","台中市","台北市","台中市")
+)
+class(birthplace)
+levels(birthplace)
+as.integer(birthplace)
+```
+
+
+```{r}
+stringInteger <- c("1","2","-11")
+class(stringInteger) # 無法進行數值運算
+```
+
+```{r}
+trueInteger <- as.integer(stringInteger)
+class(trueInteger) # 可以進行數值運算
+```
+
+
+```{r}
+stringInteger
+trueInteger
+```
+
+# Date Time
+
+```{r}
+library(lubridate)
+```
+
+
+```{r}
+dtObject<-ymd_hms("1970-01-01 00:02:53") 
+```
+
+
+```{r}
+dtObjectVector<-ymd_hms(
+  c("1970-01-01 00:02:53",
+    "1980-02-11 11:25:22")
+)
+```
+
+```{r}
+typeof(dtObject)
+```
+
+```{r}
+as.integer(dtObject)
+```
+
+# Time zone
+
+```{r}
+Sys.timezone()
+```
+
