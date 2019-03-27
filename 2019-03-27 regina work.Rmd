@@ -13,4 +13,31 @@ knitr::opts_chunk$set(echo = TRUE)
 Sys.timezone()
 twDateTime <- ymd_hms("2019-03-18 14:04:00", tz="Asia/Taipei")
 twDateTime
+LisbonDateTime <- with_tz(twDateTime,tzone="Europe/Lisbon")
 ```
+
+```{r}
+typeof(LisbonDateTime)
+as.double(twDateTime)
+as.double(LisbonDateTime)
+```
+
+```{r}
+library(lubridate)
+dtobject2 <- ymd("2018-09-11")
+dtobject <- mdy_hms("03-14-2019 08:18:47")
+practicedate <- mdy("'March'-11-2019")
+practicedate
+class(practicedate)
+levels(practicedate)
+as.integer(practicedate)
+```
+
+```{r}
+ymd("1970-01-01") -> as.integer
+ymd("1970-01-02") -> as.integer
+ymd("2019-03-11") -> as.integer
+as.integer(ymd("1970-01-02"))
+```
+
+
