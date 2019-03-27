@@ -41,3 +41,48 @@ as.integer(ymd("1970-01-02"))
 ```
 
 
+```{r}
+a <- c(1, 5, -3)
+b <- c(0.5, 12, 2)
+a+b
+aL <- c(1L, 5L, -3L)
+bL <- c(-2L, -4L, 8L)
+aL+bL
+class(a-b)
+as.integer(a-b)
+a*b
+as.integer(a*b)
+a+5
+```
+```{r}
+twDateTime <- ymd_hms("2019-03-18 14:04:00", tz="Asia/Taipei")
+twDateTime+1
+twDateTime2 <- ymd("2019-08-11")
+twDateTime3 <- ymd("2000-02-01")
+as.double(twDateTime2-twDateTime3)
+```
+
+```{r}
+startingDate <- ymd("2000-02-17")
+startingDate+years(1)
+startingDate + dyears(1)
+```
+```{r}
+x <- 5
+y <- 7
+
+x < y
+x <= y
+x >= y
+
+x2 <- c(1,5,10)
+y2 <- c(-1,5,20)
+x2 >= y2
+
+x5 <- c("台北市","新北市","高雄市")
+y5 <- c("台北市","新北市")
+
+x5 %in% y5
+y5 %in% x5
+```
+
