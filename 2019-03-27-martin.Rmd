@@ -1,0 +1,209 @@
+---
+title: '2019-03-27'
+author: "林茂廷"
+date: "3/27/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(lubridate)
+dtObject<-ymd_hms("1970-01-01 00:02:53") 
+```
+
+```{r}
+dtObject
+```
+
+```{r}
+Sys.timezone()
+```
+
+```{r}
+twDateTime <- ymd_hms("2019-03-18 14:04:00", tz="Asia/Taipei")
+ 
+twDateTime
+```
+
+```{r}
+LisbonDateTime <- with_tz(twDateTime,tzone="Europe/Lisbon")
+
+LisbonDateTime
+```
+
+```{r}
+typeof(twDateTime)
+as.double(twDateTime)
+as.double(LisbonDateTime)
+```
+
+```{r}
+as.integer(ymd("1970-01-01"))
+as.integer(ymd("1970-01-02"))
+as.integer(ymd("2019-03-11"))
+```
+
+
+```{r}
+a <- c(1, 5, -3)
+b <- c(0.5, 12, 2)
+aL <- c(1L, 5L, -3L)
+bL <- c(-2L, -4L, 8L)
+```
+
+```{r}
+a+bL
+class(a+bL)
+
+aL+bL
+class(aL+bL)
+
+class(aL*bL)
+class(aL/bL)
+```
+
+```{r}
+a
+a+4
+```
+
+```{r}
+twDateTime <- ymd_hms("2019-03-18 14:04:00", tz="Asia/Taipei")
+```
+
+```{r}
+twDateTime
+
+twDateTime+1
+```
+
+
+
+```{r}
+ymd("2019-08-11")-ymd("2000-02-01")
+```
+
+
+```{r}
+twDateTime2 <- ymd_hms("2019-03-20 14:04:00", tz="Asia/Taipei")
+twDateTime3 <- ymd_hms("2019-03-20 14:04:30", tz="Asia/Taipei")
+
+```
+
+```{r}
+twDateTime2 - twDateTime
+```
+
+```{r}
+twDateTime3 - twDateTime
+```
+
+```{r}
+as.double(twDateTime3 - twDateTime
+)
+```
+
+```{r}
+startingDate <- ymd("2000-02-17")
+```
+
+```{r}
+startingDate + years(1)
+```
+
+```{r}
+startingDate + dyears(1)
+```
+
+## relational
+
+```{r}
+x <- 5
+y <- 7
+
+x2 <- c(1,5,10)
+y2 <- c(-1,5,20)
+```
+
+```{r}
+x >= y
+x == y
+x < y
+```
+
+```{r}
+
+x = y # 與 x<-y 相同
+
+x
+```
+
+
+```{r}
+x2 
+y2
+x2 < y2
+```
+
+
+```{r}
+x2
+x2 > 4
+```
+
+```{r}
+x3 <- c("小明","小花")
+y3 <- c("小明","小華")
+```
+
+```{r}
+x3 == y3
+```
+
+```{r}
+x3 != y3
+```
+
+
+```{r}
+x4 <- c(1,5,8)
+y4 <- c(5,8)
+
+x4
+y4
+x4 %in% y4
+```
+
+```{r}
+x2 <- c(1,NA,10)
+y2 <- c(-1,NA,20)
+
+x3 <- c(NA,"小花")
+y3 <- c(NA,"小華")
+```
+
+
+```{r}
+x2
+y2
+x2 == y2
+```
+
+```{r}
+x2 == NA
+```
+
+```{r}
+x2
+is.na(x2)
+```
+
+```{r}
+sum(x2)
+sum(x2,na.rm=F)
+sum(x2,na.rm=T)
+```
+

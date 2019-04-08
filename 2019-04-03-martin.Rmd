@@ -1,0 +1,379 @@
+---
+title: '2019-04-03'
+author: "林茂廷"
+date: "3/31/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+x3 <- c("小明","小花")
+y3 <- c("小明","小華")
+```
+
+```{r}
+x3 == y3
+x3 != y3
+```
+
+! negation
+```{r}
+x3 == y3
+!(x3 == y3)
+```
+
+```{r}
+library(readr)
+exData2 <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/exData2.csv")
+currency <- exData2$幣別
+```
+
+```{r}
+head(currency) # head 會顯示物件前六個元素值。
+```
+```{r}
+levels(currency)
+```
+
+
+資料一進來並沒有被當成factor class
+```{r}
+class(currency)
+```
+
+更正為factor class
+```{r}
+currency <- as.factor(currency)
+class(currency)
+```
+
+
+```{r}
+levels(currency)
+```
+
+length(): 數向量內的元素個數（向量長度）
+```{r}
+length(levels(currency))
+```
+
+```{r}
+step1_extractLevelsVector <- levels(currency)
+step1_extractLevelsVector
+```
+
+```{r}
+step2_countVectorLength <- length(step1_extractLevelsVector)
+```
+
+```{r}
+step2_countVectorLength
+```
+
+多少筆日元資料
+
+```{r}
+head(currency)
+levels(currency)
+```
+
+```{r}
+currency2 <- c("日元","美元","日元")
+currency2
+```
+
+```{r}
+sum(currency2 == "日元")
+```
+
+```{r}
+head(currency)
+sum(currency == "日圓JPY/USD")
+```
+
+# 5.4 Logical Operators
+
+```{r}
+x5 <- c("台北市","新北市","高雄市")
+greatTaipei <- c("台北市","新北市")
+
+
+x5 %in% greatTaipei
+```
+
+
+
+```{r}
+!(x5 %in% greatTaipei)
+```
+
+```{r}
+y5 <- c("女","男","女")
+
+y5=="女"
+```
+
+
+
+
+
+
+
+```{r}
+!(y5=="女")
+```
+
+> 圈圏是要圏出"Relational Operation"為真的元素在物件內的「位置」
+
+```{r}
+x5 %in% greatTaipei
+y5 == "女"
+(x5 %in% greatTaipei) & (y5=="女") # 同時（&）來自於greatTaipei 又是 女 性。
+```
+
+```{r}
+which((x5 %in% greatTaipei) & (y5=="女"))
+```
+
+```{r}
+x5
+y5
+```
+
+```{r}
+(x5 %in% greatTaipei)
+(y5=="女")
+(x5 %in% greatTaipei) | (y5=="女")
+```
+
+
+```{r}
+which((x5 %in% greatTaipei) | (y5=="女"))
+```
+
+```{r}
+x5 %in% greatTaipei
+y5=="女"
+xor(x5 %in% greatTaipei, y5=="女")
+```
+
+
+
+```{r}
+which(xor(x5 %in% greatTaipei, y5=="女"))
+```
+
+
+綜合練習
+```{r}
+library(readr)
+exData2 <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/exData2.csv")
+date <- as.character(exData2$期間)
+currency <- exData2$幣別
+exchangeRate <- exData2$匯率
+```
+
+請把date的class存成date class
+```{r}
+class(date)
+```
+
+```{r}
+head(date)
+```
+
+```{r}
+library(lubridate)
+date <- ymd(date)
+```
+
+```{r}
+class(date)
+```
+
+1980-08-01之後的資料有多少筆。
+
+```{r}
+isAfter19800801 <-
+  date >= ymd("1980-08-01")
+isAfter19800801
+```
+
+
+```{r}
+head(as.integer(date))
+as.integer(ymd("1980-08-01"))
+head(date >= ymd("1980-08-01"))
+```
+
+```{r}
+class(isAfter19800801)
+```
+
+```{r}
+sum(isAfter19800801)
+```
+
+
+幣別為“歐元USD/EUR”的資料有多少筆。
+```{r}
+head(currency)
+
+```
+
+```{r}
+head(currency == "歐元USD/EUR")
+
+isEURO <- currency == "歐元USD/EUR"
+```
+
+```{r}
+sum(isEURO)
+```
+
+
+有將currency轉成factor class
+```{r}
+currency <- as.factor(currency)
+```
+
+```{r}
+isEURO <- currency == "歐元USD/EUR"
+sum(isEURO)
+```
+
+exchangeRate有多少筆NA
+```{r}
+isExchangeRateNA <-
+  is.na(exchangeRate)
+sum(isExchangeRateNA)
+```
+
+排除NA後，幣別為“歐元USD/EUR”的資料有多少筆
+
+```{r}
+isNotNA <- !is.na(exchangeRate)
+isEuro <- currency == "歐元USD/EUR"
+```
+
+
+```{r}
+satisfyBoth <- isNotNA & isEuro
+sum(satisfyBoth)
+```
+
+另一種先不存成isNotNA, isEuro的寫法
+```{r}
+satifyBoth <-
+  !is.na(exchangeRate) & currency == "歐元USD/EUR"
+sum(satisfyBoth)
+```
+
+
+```{r}
+library(readr)
+transcriptDataFinal <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/transcriptDataFinal.csv")
+courseType <- transcriptDataFinal$`必選修類別（必∕選∕通）`
+major <- transcriptDataFinal$學系
+studentID <- transcriptDataFinal$學號
+grade <- transcriptDataFinal$學期成績
+```
+
+有多少筆資料是來自經濟學系
+```{r}
+sum(major == "經濟學系")
+```
+
+學號“5bdS6977b”同學修了多少課
+```{r}
+sum(studentID == "5bdS6977b")
+```
+
+學號“5bdS6977b”有多少科成績及格
+```{r}
+sum(
+  studentID == "5bdS6977b" &
+    grade >= 60
+)
+```
+
+資料來自經濟學系學生且為選修課
+```{r}
+sum(
+  major == "經濟學系" &
+    courseType == "選"
+)
+```
+
+經濟學系學生且必修課程中，成經不及格佔多少比例
+1. 經濟學系學生且必修課程有多少筆
+```{r}
+sum(
+  major == "經濟學系" &
+    courseType == "必"
+) -> 分母
+分母
+```
+
+2. 其中成績不及格佔多少比例
+```{r}
+sum(
+  major == "經濟學系" &
+    courseType == "必" &
+    grade < 60
+) -> 分子
+分子
+```
+
+```{r}
+分子/分母
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
