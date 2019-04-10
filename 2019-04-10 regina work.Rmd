@@ -52,5 +52,26 @@ str_c(month,"月",day,"天")
 str_c(month,day, sep="月")
 ```
 
+```{r}
+dates <- c("3-11", "4-5",  "2-7")
+dates
+str_split(dates,"-")
+```
+```{r}
+dates <- c("3-11", "4-5",  "2-7")
+str_split(dates,"-")
+dates2 <- c("3-11-2019", "4-5-2017",  "2-7-2015")
+dates2
+str_replace(dates2,"-","/")
+str_replace_all(dates2,"-","/")
+```
 
+```{r}
+library(readr)
+githubData <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/githubData.csv")
+username <- githubData$`GitHub username`[11:16]
+reponame <- githubData$`GitHub repo name`[11:16]
+str_c("http://github.com","/",username,"/",reponame)
+
+```
 
