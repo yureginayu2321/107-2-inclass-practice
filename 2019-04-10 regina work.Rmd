@@ -74,4 +74,60 @@ reponame <- githubData$`GitHub repo name`[11:16]
 str_c("http://github.com","/",username,"/",reponame)
 
 ```
+```{r}
+library(readr)
+filmVotingData <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/%E7%AC%AC%E4%B8%89%E5%B1%86%E7%B6%93%E6%BF%9F%E6%92%AD%E5%AE%A2%E7%AB%B6%E8%B3%BD%E5%8F%83%E8%B3%BD%E4%BD%9C%E5%93%81%E6%8A%95%E7%A5%A8%E7%B5%90%E6%9E%9C%E6%A8%A3%E6%9C%AC%20-%20Sheet1.csv")
+birthday<-filmVotingData$`出生西元年月日（驗證本人用）`
+birthday
+str_sub(birthday,1,4) ->y
+str_sub(birthday,5,6) ->m
+str_sub(birthday,7,8) ->d
+str_c("西元",y,"年",m,"月",d,"日") -> bdy
+bdy
+```
+```{r}
+library(readr)
+filmVotingData <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/%E7%AC%AC%E4%B8%89%E5%B1%86%E7%B6%93%E6%BF%9F%E6%92%AD%E5%AE%A2%E7%AB%B6%E8%B3%BD%E5%8F%83%E8%B3%BD%E4%BD%9C%E5%93%81%E6%8A%95%E7%A5%A8%E7%B5%90%E6%9E%9C%E6%A8%A3%E6%9C%AC%20-%20Sheet1.csv")
+birthday<-filmVotingData$`出生西元年月日（驗證本人用）`
+birthday
+y<-str_sub(birthday,1,4)
+m<-str_sub(birthday,5,6)
+d<-str_sub(birthday,7,8)
+bday<-str_c("西元",y,"年",m,"月",d,"日")
+bday
+```
+
+```{r}
+date<-c("099/01","099/02","099/03")
+library(lubridate)
+years <- str_sub(date,1,3)
+months <- str_sub(date,5,6)
+c <- as.numeric(years)+1911
+
+class(c)
+```
+date<-c("099/01","099/02","099/03")
+library(lubridate)
+year<-str_sub(date,1,3)
+year<-as.numeric(year)
+ys<-years(year+1911)
+ms<-str_sub(date,5,6)
+dates<-str_c(str_sub(ys,1,4),m,sep="/")
+dates
+```{r}
+a<-c(1:3)
+typeof(a)
+a
+aWithNames <- c(
+  a1=1,
+  a2=2,
+  a3=3
+)
+typeof(a)
+aWithNames
+b2<-list(
+  '第一個'="a",
+  '第二個'="b",
+  '第三個'=c(1:10))
+```
 
