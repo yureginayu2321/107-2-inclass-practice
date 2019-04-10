@@ -1,0 +1,22 @@
+---
+title: '2019-04-10'
+author: "林茂廷"
+date: "4/10/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(stringr)
+```
+subset
+```{r}
+course <- c("個體經濟學","投資學","總體經濟學")
+str_subset(course,"經濟學")
+str_detect(course,"經濟學")
+```
+
+
