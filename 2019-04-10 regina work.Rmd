@@ -19,4 +19,38 @@ str_subset(course,"經濟學")
 str_detect(course,"經濟學")
 ```
 
+```{r}
+courseA <- c('男','女','女','男','男')
+str_detect(courseA,'女')
+```
+```{r}
+studentID<-c(
+  '410177115','410176080','410174233','410177011','410182045','410176014')
+"系別" <-str_sub(studentID, start = 5, end = 6)
+'入學年'<-str_sub(studentID,start = 2, end = 4)
+
+```
+##join
+
+str_c
+```{r}
+month <- c("3","4","5")
+day <- c("11","5","2")
+char1 <- c("月","月","月")
+char2 <- c("日","日","日")
+month
+char1
+day
+char2
+str_c(month,char1,day,char2)
+```
+```{r}
+str_c(month,c("月"),day,c("日"))
+
+str_c(month,"月",day,"天")
+
+str_c(month,day, sep="月")
+```
+
+
 
