@@ -41,3 +41,85 @@ major<- str_sub(studentID,5,6) # 學系號
 major
 ```
 
+```{r}
+studentID
+入學年<-str_sub(studentID,2,4)
+入學年
+```
+
+# join
+
+str_c
+```{r}
+month <- c("3","4","2")
+day <- c("11","5","7")
+char1 <- c("月","月","月")
+char2 <- c("日","日","日")
+month
+char1
+day 
+char2
+str_c(month,char1,day,char2)
+```
+
+```{r}
+str_c(month,c("月"),day,c("日"))
+```
+
+```{r}
+str_c(month,"月",day,"日")
+```
+
+
+```{r}
+month
+day
+str_c(month,day, sep="-")
+```
+
+```{r}
+dates <- c("3-11", "4-5",  "2-7")
+dates
+str_split(dates,"-")
+```
+
+str_replace
+```{r}
+dates
+str_replace(dates,"-","月")
+```
+
+```{r}
+dates2 <- c("3-11-2019", "4-5-2017",  "2-7-2015")
+dates2
+str_replace(dates2,"-","/")
+str_replace_all(dates2,"-","/")
+```
+
+```{r}
+library(readr)
+githubData <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/githubData.csv")
+username <- githubData$`GitHub username`[11:16]
+reponame <- githubData$`GitHub repo name`[11:16]
+```
+
+```{r}
+username
+reponame
+```
+
+```{r}
+"https://github.com"
+username
+reponame
+str_c("https://github.com",username,reponame,sep="/")
+```
+
+```{r}
+"https://github.com"
+username[1:2]
+reponame[1:2]
+str_c("https://github.com",username[1:2],reponame[1:2],sep="/")
+
+```
+
