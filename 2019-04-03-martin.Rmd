@@ -30,6 +30,8 @@ x3 == y3
 library(readr)
 exData2 <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/exData2.csv")
 currency <- exData2$幣別
+class(currency
+      )
 ```
 
 ```{r}

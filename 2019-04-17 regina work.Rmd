@@ -1,0 +1,138 @@
+---
+title: '2019-04-17'
+author: "林茂廷"
+date: "4/17/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+library(stringr)
+library(lubridate)
+```
+```{r}
+studentRecord <-
+  list(
+    學號="410073058",
+    姓名="王小明",
+    性別="男",
+    學年平均成績=list(
+      一年級=88,
+      二年級=90.3,
+      三年級=92,
+      四年級=95
+    )
+  )
+studentRecord
+```
+```{r}
+plasticContainer <- list(
+  greenBox=c("paper","scissor"),     # location 1
+  redBox=c(1,3,2.5),               # location 2
+  blueBox=c(TRUE,FALSE,TRUE,TRUE)    # location 3
+)
+```
+
+```{r}
+plasticContainer
+plasticContainer[["greenBox"]] 
+plasticContainer[[1]]
+plasticContainer[["redboz"]]
+plasticContainer[[2]]
+plasticContainer[[3]]
+plasticContainer[["greenBox"]][[1]]
+```
+```{r}
+成績單 <- c(
+  個經=90,
+  總經=77,
+  統計=88
+)
+
+成績單[[1]]
+
+
+```
+```{r}
+studentRecord <-
+  list(
+    '學號'="410073058",
+    '姓名'="王小明",
+    '性別'="男",
+    '學年平均成績'=list(
+      '一年級'=88,
+      '二年級'=90.3,
+      '三年級'=92,
+      '四年級'=95
+    )
+  )
+
+studentRecord[['姓名']]
+studentRecord[['學年平均成績']] -> x
+x[['三年級']]
+```
+
+```{r}
+plasticContainer[c("greenBox","redBox")] 
+plasticContainer[c(1,2)]
+
+extract1 <- plasticContainer[c("greenBox")]
+extract1
+extract2 <- plasticContainer[[c("greenBox")]]
+extract2
+```
+
+```{r}
+extract1[[1]][[1]]
+extract2[[1]]
+```
+
+```{r}
+plasticContainer
+length(plasticContainer
+      )
+plasticContainer[c(T,F,T)]
+
+```
+```{r}
+plasticContainer
+plasticContainer$greenBox
+plasticContainer[["greenBox"]]
+```
+
+```{r}
+your_github_username <- "yureginayu2321"
+your_practice_reponame <- "107-2-inclass-practice"
+library(httr)
+library(stringr)
+str_replace_all(
+  "https://api.github.com/repos/:owner/:repo/commits",
+  c(
+    ":owner"=your_github_username,
+    ":repo"=your_practice_reponame
+    )
+  ) -> commitCheckStatement
+commitCheck <- content(GET(commitCheckStatement))
+commitCheck
+commitCheckStatement
+```
+```{r}
+library(readr)
+filmVotingData <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/podcastcompetition3.csv")
+str_replace(filmVotingData$請選擇你最喜歡的影片二部,", by"," by") -> favoriteTwo
+birthday <- filmVotingData$`出生西元年月日（驗證本人用）`
+timeStamp <- filmVotingData$Timestamp
+```
+```{r}
+str_length(birthday)
+logiCorrect <- str_length(birthday) == 8
+logiCorrect
+logiCorrect[logiCorrect==TRUE]
+favoriteTwo[logiCorrect] -> validfavoritTwo
+validfavoritTwo
+```
+
