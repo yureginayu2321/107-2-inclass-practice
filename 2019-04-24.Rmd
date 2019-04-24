@@ -13,3 +13,30 @@ Mat2[[4]]
 Mat2[[3]]
 ```
 
+```{r}
+StuDF <- data.frame(StuID=c(1,2,3,4,5),
+                  name=c("小明","大雄","胖虎","小新","大白"),
+                  score=c(80,60,90,70,50))
+StuDF
+StuDF[["姓名"]][[2]]
+```
+```{r}
+StuDF2 <- data.frame(
+  "學號"=c(172,214,322,425,517),
+  "姓名"=c("小明","大雄","胖虎","小新","大白"),
+  "成績"=c(80,60,90,70,50),
+  stringsAsFactors = FALSE
+  )
+StuDF2 
+```
+```{r}
+as.data.frame()
+```
+
+```{r}
+chosenLETTERS <- LETTERS[1:18]
+chosenLETTERS
+matObj1 <-matrix(chosenLETTERS,3,6)
+matObj1
+```
+
