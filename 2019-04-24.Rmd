@@ -5,3 +5,11 @@ date: "4/24/2019"
 output: html_document
 ---
 
+```{r}
+Mat2 <- matrix(c("a","b","c","d"),2,2)
+Mat2
+Mat2[[2]]
+Mat2[[4]]
+Mat2[[3]]
+```
+
