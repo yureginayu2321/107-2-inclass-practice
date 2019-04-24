@@ -47,6 +47,7 @@ class(MAT2)
 typeof(MAT2)
 MAT2[[2]]
 MAT2[c(T,F,F,T)]
+MAT2[c(1,4)]
 ```
 
 ## data frame
@@ -99,4 +100,110 @@ StuDF2 <- data.frame(
   )
 StuDF2 
 ```
+
+```{r}
+StuList <- list(
+  學號=c(172,214,322,425,517),
+  姓名=c("小明","大雄","胖虎","小新","大白"),
+  成績=c(80,60,90,70,50)
+  )
+StuList 
+```
+
+```{r}
+as.data.frame(StuList) -> StuDF3
+
+class(StuDF3)
+```
+
+```{r}
+StuDF3
+```
+
+```{r}
+as.data.frame(StuList,stringsAsFactors = F) -> StuDF4
+class(StuDF4)
+
+```
+
+```{r}
+StuDF4
+```
+
+
+```{r}
+StuDF3
+```
+
+
+```{r}
+chosenLETTERS <- LETTERS[1:15]
+matObj1 <- matrix(chosenLETTERS,5,3)
+matObj1
+```
+
+
+
+```{r}
+LETTERS
+chosenLETTERS <- LETTERS[1:8]
+m <- matrix(chosenLETTERS,2,4)
+m
+tolower(m) # 轉成小寫
+m
+toupper(m) # 轉成大寫
+m
+```
+
+```{r}
+matObj1
+
+matObj1[[8]]
+```
+
+```{r}
+matObj1[3,2]
+```
+
+```{r}
+matObj1
+matObj1[c(1,4),c(2,3)]
+```
+
+```{r}
+matObj1[c(T,F,F,T,F),c(F,T,T)]
+matObj1[c(1,4),c(F,T,T)]
+```
+
+
+```{r}
+library(readr)
+classSurvey <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/classSurvey.csv")
+```
+
+```{r}
+class(classSurvey)
+```
+取出**性別，本學期學分數**
+從data frame視覺角度
+```{r}
+# classSurvey[,]
+classSurvey[c(1:60),c(4,5)]
+classSurvey[c(1:60),c(F,F,F,T,T,F)]
+classSurvey[,4:5]
+classSurvey[,c(4,5)]
+classSurvey[,c(F,F,F,T,T,F)]
+```
+
+從R的角度（即單純list vector角度）
+```{r}
+# classSurvey[]
+classSurvey[c("性別","本學期學分數")]
+```
+
+子樣本
+```{r}
+classSurvey[logical_index,]
+```
+
 
