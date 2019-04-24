@@ -38,5 +38,22 @@ chosenLETTERS <- LETTERS[1:18]
 chosenLETTERS
 matObj1 <-matrix(chosenLETTERS,3,6)
 matObj1
+tolower(matObj1)  小寫
+toupper(matObj1)  大寫
+```
+
+```{r}
+matObj1
+matObj1[4]
+matObj1[c(1,2),c(2,3)]
+matObj2[c(F,T,T),c(F,T,T)]
+```
+```{r}
+library(readr)
+classSurvey <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/classSurvey.csv")
+class(classSurvey)
+classSurvey[c(1:60),c(4,5)] ->x
+class
+
 ```
 
