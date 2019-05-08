@@ -95,19 +95,19 @@ westYears
 
 ```{r}
 twDates2
-str_split(twDates2,"年") -> datesSplitList
+str_split(twDates2,"年") -> datesSplitList # 用年切開 年 月值
 datesSplitList
 
-map(datesSplitList,~.[[2]]) -> monthList
+map(datesSplitList,~.[[2]]) -> monthList # 選出每個元素的第二個值
 monthList
 
-unlist(monthList) -> monthVector
+unlist(monthList) -> monthVector # 將list疊成字串向量
 monthVector
 
-str_c(as.character(westYears),monthVector,"01",sep = "-") -> westDates
+str_c(as.character(westYears),monthVector,"01",sep = "-") -> westDates # 貼成YYYY-MM-DD 字串格式
 westDates
 
-ymd(westDates) -> westDates
+ymd(westDates) -> westDates # 轉成dates
 westDates
 class(westDates)
 ```
