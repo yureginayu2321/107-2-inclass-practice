@@ -1,0 +1,127 @@
+---
+title: '2019-04-24'
+author: "林茂廷"
+date: "0508"
+
+
+
+
+
+
+期中考
+
+
+1 字串不能比
+```{r}
+as.integer(x) >50 -> logicBig
+logicBig
+```
+
+
+4.
+```{r}
+randomGrades <- sample(40:80,15,replace = T)
+randomCredits <- sample(0:3,15,replace=T)
+data3 <- list(
+  成績=randomGrades,
+  學分數=randomCredits
+)
+```
+
+```{r}
+logiPass <- (data3$成績 >= 60)
+passData <- list(成績= data3$成績[logiPass],
+                 學分數= data3$學分數[logiPass] )
+```
+
+5
+```{r}
+sample(99:103,15,replace = T)-> yy
+sample(1:12,15,replace=T)-> mm
+str_c("民國",str_pad(yy,3,"left","0"),"年",mm,"月") -> twDates
+```
+
+```{r}
+str_replace(twDates,"民國","") -> twDates2
+str_replace(twDates2,"月","") -> twDates2  
+twDates2
+```
+
+
+```{r}
+as.integer(yearCharacter)+1911 ->westYear
+westYear
+```
+
+5.3 取剩月份
+```{r}
+twDate2
+str_split(Date2,"年") -> datesSplitList
+datesSpltList
+map(datesSplitist,~.[[2]]) ->moithList
+unlist(monthList) ->monthVector   #變成向量
+monthVector
+str_c(as.character(westYears),monthVector,"01",sep="-") -> westDate
+ymd(westDate) -> westDate
+westDate
+
+```
+
+7
+```{r}
+load("sampledTranscriptData.Rda")
+names(sampledTranscriptData) <- 
+  c('學號','學期成績','學分數','學年','學期','必選修類別（必／選／通）','系級','科目名稱','年級','學屆')
+```
+7-1
+```{r}
+
+
+sampledTranscriptData$科目名稱=="科目204" > logicChosenSubject
+length(logicChosenSubject)
+sum(logicChosenSubject)
+(smapledTranscriptData$科目名稱=="科目204"& sampledTranscriptData$學期成績<60) ->logicChosenSubjectAndFail
+length(logicChosenSubjectAndFail)
+sum(logicChosenSubjectAndFail)
+sum(logicChosenSubjectAndFail)/sum(logicChosenSubject) -> failRate
+failRate
+```
+7-2
+```{r}
+x <- str_sub(sampledTranscriptData$學號,start=2,end=4)
+y <- str_sub(sampledTranscriptData$學號,start=5,end=6)
+
+sampledTranscriptData$學屆 <- x
+sampledTranscriptData$系碼 <- y
+sampledTranscriptData
+```
+7.3
+```{r}
+sampledTranscriptData$學系 <- str_replace(sampledTranscriptData$系級,"1","")
+sampledTranscriptData$學系 <- str_replace(sampledTranscriptData$學系,"2","")
+sampledTranscriptData$學系 <- str_replace(sampledTranscriptData$學系,"3","")
+sampledTranscriptData$學系 <- str_replace(sampledTranscriptData$學系,"4","")
+
+sampledTranscriptData$學系 
+```
+
+7.4
+```{r}
+(sampledTranscriptData$系碼!="73" & 
+   sampledTranscriptData$學系=="經濟學系") -> logiCheck
+
+sampledTranscriptData$學號[logiCheck] 
+
+unique(sampledTranscriptData$學號[logiCheck]) -> changeMajorStudent
+
+changeMajorStudent
+```
+7.5
+```{r}
+
+```
+
+
+
+
+
