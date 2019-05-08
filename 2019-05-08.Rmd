@@ -112,11 +112,58 @@ westDates
 class(westDates)
 ```
 
+# 7
+
+```{r}
+load("~/Desktop/GitHub/course-107-2-programming-for-data-science/exam/sampledTranscriptData.Rda")
+names(sampledTranscriptData) <- 
+  c('學號','學期成績','學分數','學年','學期','必選修類別（必／選／通）','系級','科目名稱','年級','學屆')
+```
 
 
 
+```{r}
+load("sampledTranscriptData.Rda")
+names(sampledTranscriptData) <- 
+  c('學號','學期成績','學分數','學年','學期','必選修類別（必／選／通）','系級','科目名稱','年級','學屆')
+```
 
 
+## ans71
+
+```{r}
+(sampledTranscriptData$科目名稱 == "科目204") -> logicChosenSubject
+length(logicChosenSubject)
+sum(logicChosenSubject)
+(sampledTranscriptData$科目名稱 == "科目204" & 
+    sampledTranscriptData$學期成績 < 60) -> logicChosenSubjectAndFail
+length(logicChosenSubjectAndFail)
+sum(logicChosenSubjectAndFail)
+sum(logicChosenSubjectAndFail)/sum(logicChosenSubject) -> failRate
+failRate
+```
 
 
+```{r}
+(sampledTranscriptData$科目名稱 == "科目204") -> chosenSubjectLogi
+length(chosenSubjectLogi)
+sum(chosenSubjectLogi)
+sampledTranscriptData$學期成績[chosenSubjectLogi] -> chosenGrades
+length(chosenGrades)
+sum(chosenGrades<60)/length(chosenGrades) -> failRate
+
+failRate
+```
+
+## ans72
+
+```{r}
+sampledTranscriptData$學屆 <- 
+  str_sub(sampledTranscriptData$學號,2,4)
+sampledTranscriptData$系碼 <- 
+  str_sub(sampledTranscriptData$學號,5,6)
+tail(sampledTranscriptData$學號) # or head()
+tail(sampledTranscriptData$系碼) # or head()
+#sampledTranscriptData
+```
 
