@@ -217,3 +217,17 @@ list(
 
 ```
 
+## ans75
+
+```{r}
+## ----ans75---------------------------------------------------------------
+(sampledTranscriptData$學號 == "410073409b" &
+  sampledTranscriptData$學年==101 &
+  sampledTranscriptData$學期==1) -> logiSelect
+  
+sum(sampledTranscriptData$學分數[logiSelect]*
+  sampledTranscriptData$學期成績[logiSelect])/sum(sampledTranscriptData$學分數[logiSelect]) -> studentGPA
+
+studentGPA
+```
+
