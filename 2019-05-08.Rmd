@@ -1,0 +1,122 @@
+---
+title: '2019-05-08'
+author: "林茂廷"
+date: "5/8/2019"
+output: html_document
+---
+
+## 期中考
+
+## ans1
+
+```{r}
+library(lubridate); library(stringr); library(dplyr); library(readr); library(purrr)
+```
+
+```{r}
+x <- as.character(round(runif(10)*100),10)
+x
+```
+
+```{r}
+as.integer(x) > 50 -> logicBig
+logicBig
+```
+
+## ans4
+
+```{r}
+randomGrades <- sample(40:80,15,replace = T)
+randomCredits <- sample(0:3,15,replace=T)
+data3 <- list(
+  成績=randomGrades,
+  學分數=randomCredits
+)
+```
+
+```{r}
+data3
+```
+
+
+```{r}
+logiPass <- (data3$成績 >= 60 )
+logiPass
+
+a <- data3$成績[logiPass]
+b <- data3$學分數[logiPass]
+passData <- list(
+  成績= a ,
+  學分數= b
+)
+passData
+```
+
+
+## ans5
+
+```{r}
+sample(99:103,15,replace = T)-> yy
+sample(1:12,15,replace=T)-> mm
+str_c("民國",str_pad(yy,3,"left","0"),"年",mm,"月") -> twDates
+twDates
+```
+
+
+### ans51
+```{r}
+str_replace(twDates,"民國","") -> x1
+x1
+str_replace(x1,"月","") -> twDates2
+twDates2
+```
+
+
+```{r}
+str_replace_all(twDates,"(民國)|(月)","")
+```
+
+
+### ans52
+
+```{r}
+twDates
+str_sub(twDates,3,5) -> yearCharacter
+yearCharacter
+```
+
+```{r}
+as.integer(yearCharacter)+1911 -> westYears
+westYears
+```
+
+
+### ans53
+
+```{r}
+twDates2
+str_split(twDates2,"年") -> datesSplitList
+datesSplitList
+
+map(datesSplitList,~.[[2]]) -> monthList
+monthList
+
+unlist(monthList) -> monthVector
+monthVector
+
+str_c(as.character(westYears),monthVector,"01",sep = "-") -> westDates
+westDates
+
+ymd(westDates) -> westDates
+westDates
+class(westDates)
+```
+
+
+
+
+
+
+
+
+
