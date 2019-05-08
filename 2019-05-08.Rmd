@@ -167,3 +167,53 @@ tail(sampledTranscriptData$系碼) # or head()
 #sampledTranscriptData
 ```
 
+## ans73
+
+```{r}
+## ----ans73---------------------------------------------------------------
+sampledTranscriptData$學系 <- str_replace(sampledTranscriptData$系級,"1","")
+sampledTranscriptData$學系 <- str_replace(sampledTranscriptData$學系,"2","")
+sampledTranscriptData$學系 <- str_replace(sampledTranscriptData$學系,"3","")
+sampledTranscriptData$學系 <- str_replace(sampledTranscriptData$學系,"4","")
+
+head(sampledTranscriptData$系級)
+head(sampledTranscriptData$學系)
+```
+
+```{r}
+## ----ans73---------------------------------------------------------------
+sampledTranscriptData$學系 <- str_replace(sampledTranscriptData$系級,"[1234]","")
+
+sampledTranscriptData$學系 
+```
+
+```{r}
+## ----ans73---------------------------------------------------------------
+sampledTranscriptData$學系 <- str_replace(sampledTranscriptData$系級,"[:digit:]","")
+
+sampledTranscriptData$學系 
+
+```
+
+## ans74
+
+```{r}
+## ----ans74---------------------------------------------------------------
+(sampledTranscriptData$系碼!="73" & 
+   sampledTranscriptData$學系=="經濟學系") -> logiCheck
+
+sampledTranscriptData$學號[logiCheck] 
+
+unique(sampledTranscriptData$學號[logiCheck]) -> changeMajorStudent
+
+changeMajorStudent
+```
+
+```{r}
+list(
+  學系=,
+  系碼=
+)
+
+```
+
