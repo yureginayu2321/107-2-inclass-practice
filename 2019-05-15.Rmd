@@ -1,0 +1,68 @@
+---
+title: '2019-05-15'
+author: "林茂廷"
+date: "5/15/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 
+
+```{r}
+Vector1 <- letters[1:6]
+Vector1
+
+names(Vector1)
+```
+
+```{r}
+names(Vector1) <- c('名稱1','名稱2','名稱3','名稱4','名稱5','名稱6')
+names(Vector1)
+```
+
+```{r}
+Vector1[["名稱4"]]
+```
+
+## colnames/ rownames
+
+```{r}
+StuDF2 <- data.frame(
+  學號=c(172,214,322,425,517),
+  姓名=c("小明","大雄","胖虎","小新","大白"),
+  成績=c(80,60,90,70,50),
+  stringsAsFactors = FALSE
+  )
+StuDF2 
+```
+
+```{r}
+colnames(StuDF2)
+names(StuDF2)
+```
+
+```{r}
+colnames(StuDF2) <- c("col1","col2","col3")
+colnames(StuDF2)
+StuDF2
+```
+
+只改col2的名稱
+```{r}
+colnames(StuDF2)[[2]] <- c("姓名")
+colnames(StuDF2)
+StuDF2
+
+```
+ 
+
+改col2,3的名稱
+```{r}
+colnames(StuDF2)[c(2,3)] <- c("name","grade")
+colnames(StuDF2)
+StuDF2
+
+```
