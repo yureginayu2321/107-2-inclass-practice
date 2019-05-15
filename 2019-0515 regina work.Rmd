@@ -39,10 +39,63 @@ StuDF2
 ```
 
 
+```{r}
+a <- c("1","b","TRUE")
+a
+a[[2]] <- "c" # 元素存在
+a[[5]] <- "7" # 元素不存在
+a
+```
 
+```{r}
+b <- list(
+  元素1=1,
+  元素2="Hello",
+  元素3=TRUE
+)
+b
+b[[3]] <- "False"
+b[[5]] <- "7"
+b
+b$元素2 <- "Hi"
+b$`新成員` <- c(2L,5L,1L)
+b
+```
 
+```{r}
+names(b)
+b[["新元素A"]] <- c(1,2,3)
+b$新成員
 
-
+names(b)
+b[["新元素A"]] <- c(1,2,3)
+b$新元素B <- c(T,F,T)
+b
+```
+```{r}
+library(readr)
+exData3 <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/exData3.csv",
+                    col_types = cols(
+                      匯率 = col_number(),
+                      期間 = col_character()))
+```
+```{r}
+library(lubridate)
+ymd(exData3$期間) -> A
+class(A)
+```
+增加一個「isAsiaCrisis」的logical變數，其值為TRUE若「期間」介於1997-06-01到1998-12-01（含前後）。
+```{r}
+isAsiaCrisis <- exData3$期間 >= ymd("1997-06-01") & exData3$期間 <= ymd("1998-12-01")
+isAsiaCrisis
+exData3$isAsiaCrisis <- isAsiaCrisis
+exData3
+```
+```{r}
+names(exData3)
+class(exData3$期間)
+class(exData3$幣別)
+```
 
 
 
