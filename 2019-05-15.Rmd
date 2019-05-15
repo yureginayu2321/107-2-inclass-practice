@@ -126,6 +126,7 @@ exData3 <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/mas
                     col_types = cols(
                       匯率 = col_number(),
                       期間 = col_character()))
+names(exData3)
 ```
 
 
@@ -149,6 +150,7 @@ ymd(exData3$期間) -> exData3$期間
 exData3$isAsiaCrisis<- (exData3$期間>=ymd("1997-06-01")& exData3$期間<=ymd("1998-12-01"))
 class(exData3$isAsiaCrisis)
 ```
+
 ```{r}
 logiAsiaCrisis <- exData3$isAsiaCrisis
 exData3[logiAsiaCrisis, ]
@@ -157,5 +159,52 @@ exData3[logiAsiaCrisis, ]
 或合寫在一起
 ```{r}
 exData3[exData3$isAsiaCrisis==T ,]
+exData3[exData3$isAsiaCrisis, ]
+```
+
+
+```{r}
+exampleDF <- data.frame(
+  exchangeRate=c(22,3,3,2,7,12,13),
+  isAsiaCrisis=c(T,T,F,F,F,T,T)
+)
+exampleDF
+```
+
+```{r}
+exampleDF[c(1,2,6,7),]
+exampleDF[c(T,T,F,F,F,T,T), ]
+```
+
+```{r}
+library(readr)
+transcriptDataFinal <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/transcriptDataFinal.csv")
+```
+
+```{r}
+names(transcriptDataFinal)
+```
+
+學號“92aS67fee”子樣本
+```{r}
+
+```
+
+
+## function
+
+```{r}
+utility_cobb_douglass <- function(x,y,.alpha,.beta){
+  utilValue <- x^.alpha*y^.beta # 程序產生output值
+  return(utilValue) # 傳回output值
+}
+```
+
+```{r}
+class(utility_cobb_douglass)
+```
+
+```{r}
+utility_cobb_douglass(1,2,0.5,0.8)
 ```
 
