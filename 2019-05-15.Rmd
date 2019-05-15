@@ -111,4 +111,37 @@ b[["元素3"]] <- FALSE
 b
 ```
 
+使用"元素名稱"創新元素
+```{r}
+names(b)
+b[["新元素A"]] <- c(1,2,3)
+b$新元素B <- c(T,F,T)
+b
+```
+
+
+```{r}
+library(readr)
+exData3 <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/exData3.csv",
+                    col_types = cols(
+                      匯率 = col_number(),
+                      期間 = col_character()))
+```
+
+
+```{r}
+class(exData3$期間)
+```
+
+```{r}
+#取出 期間 轉成 date
+exData3$期間 -> .temp
+library(lubridate)
+ymd(.temp) -> exData3$期間
+```
+或合在一起
+```{r}
+ymd(exData3$期間) -> exData3$期間
+```
+
 
