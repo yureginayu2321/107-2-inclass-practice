@@ -221,3 +221,77 @@ myfun(1,0.5)
 myfun(-2,3)
 ```
 
+demand_function supply function
+```{r}
+
+supply_fun <- function(P,a,b){
+  Qs <- a+b*P
+  return(Qs)
+}
+
+demand_fun <- function(P,c,d){
+  Qd <- c-d*P
+  return(Qd)
+}
+```
+
+
+```{r}
+supply_fun(P=1,0,1)
+demand_fun(P=1,5,1)
+demand_fun(P=1,5,1) - supply_fun(P=1,0,1)
+```
+
+
+
+```{r}
+library(readr)
+transcriptDataFinal <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/transcriptDataFinal.csv")
+```
+
+```{r}
+studentID <-"92aS67fee" 
+transcriptDataFinal$學號==studentID -> logiChosenStudent
+sum(transcriptDataFinal$學期成績[logiChosenStudent]*
+  transcriptDataFinal$學分數[logiChosenStudent])/
+  sum(transcriptDataFinal$學分數[logiChosenStudent]) -> GPA
+```
+
+```{r}
+studentID <-"92aS67fee" 
+transcriptDataFinal$學號==studentID -> logiChosenStudent
+
+subSample <- transcriptDataFinal[logiChosenStudent,]
+
+sum(subSample$學期成績*subSample$學分數)/
+  sum(subSample$學分數) -> GPA
+```
+
+
+```{r}
+gpa_fun <- function(studentID){
+  transcriptDataFinal$學號==studentID -> logiChosenStudent
+  
+  subSample <- transcriptDataFinal[logiChosenStudent,]
+  
+  sum(subSample$學期成績*subSample$學分數)/
+    sum(subSample$學分數) -> GPA
+  return(GPA)
+}
+```
+
+```{r}
+gpa_fun("92aS67fee")
+```
+
+
+```{r}
+unique(transcriptDataFinal$學號)
+```
+
+223S63286" "105S60ba1"
+
+
+
+
+
