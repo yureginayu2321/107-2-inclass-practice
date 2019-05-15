@@ -32,3 +32,17 @@ colnames(StuDF2)
 rownames(StuDF2)
 ```
 
+```{r}
+colnames(StuDf2)[[2]] <- c("name","grade")
+colnames(StuDF2)
+StuDF2
+```
+
+
+
+
+
+
+
+
+
