@@ -144,4 +144,18 @@ ymd(.temp) -> exData3$期間
 ymd(exData3$期間) -> exData3$期間
 ```
 
+創造亞洲金融危機變數欄位
+```{r}
+exData3$isAsiaCrisis<- (exData3$期間>=ymd("1997-06-01")& exData3$期間<=ymd("1998-12-01"))
+class(exData3$isAsiaCrisis)
+```
+```{r}
+logiAsiaCrisis <- exData3$isAsiaCrisis
+exData3[logiAsiaCrisis, ]
+```
+
+或合寫在一起
+```{r}
+exData3[exData3$isAsiaCrisis==T ,]
+```
 
