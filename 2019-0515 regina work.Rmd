@@ -96,6 +96,56 @@ names(exData3)
 class(exData3$期間)
 class(exData3$幣別)
 ```
+利用「isAsiaCrisis」值，結合使用[.R,.C]取出1997-06-01到1998-12-01亞洲金融危機的子樣本。
+```{r}
+
+exData3[exData3$isAsiaCrisis==T, ] -> bbb #前面要T   ,後面是都要
+bbb
+```
+8.1.2
+
+```{r}
+library(readr)
+transcriptDataFinal <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/transcriptDataFinal.csv")
+```
+```{r}
+studentID <-"92aS67fee" 
+transcriptDataFinal$學號==studentID -> logiChosenStudent
+sum(transcriptDataFinal$學期成績[logiChosenStudent]*
+  transcriptDataFinal$學分數[logiChosenStudent])/
+  sum(transcriptDataFinal$學分數[logiChosenStudent]) -> GPA
+```
+```{r}
+transcriptDataFinal$學號=="92aS67fee" -> a
+transcriptDataFinal[a,]
+
+```
+```{r}
+utility_cobb_douglass <- function(x,y,.alpha,.beta){
+  utilValue <- x^.alpha*y^.beta # 程序產生output值
+  return(utilValue) # 傳回output值
+}
+```
+```{r}
+utility_cobb_douglass(1,2,1,3)
+class(utility_cobb_douglass)
+```
+函數名稱 <- function(input1, input2,...){
+
+函數程序內容
+
+return(output)
+}
+```{r}
+supply_fun <- function(a,b,P){supply <- a+b*P
+return(supply)}
+supply_fun(1,2,5)
+```
+```{r}
+demand_fun <- function(c,d,P){Qd <- c-d*P
+return(Qd)}
+demand_fun(1,2,3)
+```
 
 
 
