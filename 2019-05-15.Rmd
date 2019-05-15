@@ -208,3 +208,16 @@ class(utility_cobb_douglass)
 utility_cobb_douglass(1,2,0.5,0.8)
 ```
 
+$$f(x,\alpha)=\alpha+x$$
+```{r}
+myfun <- function(x,alpha){
+  f_value <- alpha+x
+  return(f_value)
+}
+```
+
+```{r}
+myfun(1,0.5)
+myfun(-2,3)
+```
+
