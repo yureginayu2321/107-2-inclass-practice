@@ -66,3 +66,49 @@ colnames(StuDF2)
 StuDF2
 
 ```
+
+```{r}
+library(stringr)
+rownames(StuDF2)
+rownames(StuDF2) <- str_c("第",1:5,"筆")
+rownames(StuDF2)
+StuDF2
+
+```
+
+## 新增/取代
+
+```{r}
+a <- c("1","b","TRUE")
+a
+a[[2]] <- "c" # 元素存在
+a[[5]] <- "7" # 元素不存在
+a
+```
+
+
+```{r}
+b <- list(
+  元素1=1,
+  元素2="Hello",
+  元素3=TRUE
+)
+b
+b[[3]] <- FALSE
+b
+```
+
+
+```{r}
+b
+b$元素3 <- TRUE
+b
+```
+
+```{r}
+b
+b[["元素3"]] <- FALSE
+b
+```
+
+
