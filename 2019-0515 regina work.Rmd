@@ -146,6 +146,12 @@ demand_fun <- function(c,d,P){Qd <- c-d*P
 return(Qd)}
 demand_fun(1,2,3)
 ```
+```{r}
+gpa_fun <-function(studentID){transcriptDataFinal$學號==studentID ->logiChosenStudent
+  subSample <- transcriptDataFinal[logiChosenStudent, ]
+  sum(subSample$學期成績*subSample$學分數)/sum(subSample$學分數) ->GPA
+  return(GPA)}
+```
 
 
 
