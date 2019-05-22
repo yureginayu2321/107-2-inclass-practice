@@ -1,0 +1,89 @@
+---
+title: '2019-04-17'
+author: "林茂廷"
+date: "5/22/2019"
+output: html_document
+---
+```{r}
+library(readr)
+invoiceList <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/invoiceList.csv",
+col_types = cols(訂單時間.以訂單時區顯示. = col_character()))
+names(invoiceList)[[2]] <- "訂單時區之下單時間"
+```
+
+```{r}
+(invoiceList$訂單時區=="America/New_York") -> nyLogical
+(invoiceList$訂單時區=="Asia/Taipei") -> tpLogical
+
+invoiceList$UTC時間[nyLogical] <-
+  with_tz(ymd_hms(invoiceList$`訂單時區之下單時間`[nyLogical],
+          tz="America/New_York"),tzone="UTC")
+invoiceList$UTC時間[tpLogical] <-
+  with_tz(ymd_hms(invoiceList$`訂單時區之下單時間`[tpLogical],
+          tz="Asia/Taipei"),tzone="UTC")
+
+invoiceList 
+```
+
+```{r}
+library(readr)
+transcriptDataFinal <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/transcriptDataFinal.csv")
+```
+```{r}
+studentID <-"92aS67fee" 
+transcriptDataFinal$學號==studentID -> logiChosenStudent
+
+subSample <- transcriptDataFinal[logiChosenStudent,]
+
+sum(subSample$學期成績*subSample$學分數)/
+  sum(subSample$學分數) -> GPA
+```
+請把以America/New_York時區輸入的時間字串"1973-02-21 12:05:22"，轉成date time class, 再改成Asia/Taipei時間顯示。
+```{r}
+ymd_hms_txChange <- function(input,fromTzone,toTzone){
+  x <- ymd_hms(input,tz=fromTzone)
+  y <- with_tz(x,tzone =toTzone)
+  return(y)
+}
+```
+
+```{r}
+ymd_hms_tzChange <- function(input,fromTzone,toTzone){
+  time1 <- ymd_hms(input,tz=fromTzone)
+  answer <- with_tz(time1,tzone = toTzone)
+  return(answer)
+}
+ymd_hms_tzChange("1973-02-21 12:05:22","America/New_York","Asia/Taipei")
+```
+
+```{r}
+library(stringr)
+sample(99:103,15,replace = T)-> yy
+sample(1:12,15,replace=T)-> mm
+str_c("民國",str_pad(yy,3,"left","0"),"年",mm,"月") -> twDates
+```
+```{r}
+library(stringr); library(lubridate)
+yyyy<-as.integer(str_extract(twDates,"(?<=(民國))[:digit:]+"))+1911
+mm<-str_extract(twDates,"[:digit:]+(?=月)")
+yyyymmdd <- ymd(str_c(yyyy,mm,"01",sep="-"))
+```
+請寫一個函數其名稱為date_convert_twYM，且date_convert_twYM(x)可以把一個民國年月字串物件x轉成date time class的西元年月日物件輸出。
+
+```{r}
+date_convert_twYM <- function(){
+  x <- ymd_hms(,)}
+```
+
+```{r}
+date_convert_TWYM<-function(IN){
+  yyyy<-as.integer(str_extract(IN,"(?<=(民國))[:digit:]+"))+1911
+mm<-str_extract(IN,"[:digit:]+(?=月)")
+ans<- ymd(str_c(yyyy,mm,"01",sep="-")) 
+return(ans)
+
+}
+
+date_convert_TWYM(twDates)
+```
+
