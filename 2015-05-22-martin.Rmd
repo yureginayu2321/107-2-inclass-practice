@@ -1,0 +1,15 @@
+---
+title: '2015-05-22'
+author: "林茂廷"
+date: "5/22/2019"
+output: html_document
+---
+
+## midterm 6.2
+
+```{r}
+library(readr)
+invoiceList <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/invoiceList.csv",
+col_types = cols(訂單時間.以訂單時區顯示. = col_character()))
+```
+
