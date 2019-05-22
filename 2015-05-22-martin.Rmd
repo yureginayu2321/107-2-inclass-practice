@@ -174,13 +174,17 @@ twDates
 ```{r}
 twDates
 library(stringr); library(lubridate)
+```
+
+原始步驟
+```{r}
 yyyy<-as.integer(str_extract(twDates,"(?<=(民國))[:digit:]+"))+1911
 mm<-str_extract(twDates,"[:digit:]+(?=月)")
 yyyymmdd <- ymd(str_c(yyyy,mm,"01",sep="-"))
 yyyymmdd
 ```
 
-
+寫成函數
 ```{r}
 date_convert_twYM <- function(twDates){
   #twDates
@@ -192,7 +196,13 @@ date_convert_twYM <- function(twDates){
 
 ```
 
-
+```{r}
+sample(99:103,15,replace = T)-> yy
+sample(1:12,15,replace=T)-> mm
+str_c("民國",str_pad(yy,3,"left","0"),"年",mm,"月") -> twDates_New
+twDates_New
+date_convert_twYM(twDates_New)
+```
 
 
 
