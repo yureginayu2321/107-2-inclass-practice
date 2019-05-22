@@ -27,12 +27,61 @@ ymd_hms(invoiceList$`訂單時區之下單時間`[nyLogical],
 
 invoiceList$UTC時間[nyLogical] <-
   with_tz(nyDateTime,tzone="UTC")
+```
 
-ymd_hms(invoiceList$`訂單時區之下單時間`[tpLogical],
-          tz="Asia/Taipei") -> tpDateTime
-invoiceList$UTC時間[tpLogical] <-
-  with_tz(tpDateTime,tzone="UTC")
 
-invoiceList 
+
+```{r}
+ymd_hms(invoiceList$訂單時區之下單時間[tpLogical],
+        tz="Asia/Taipei") -> tpDateTime
+
+invoiceList$UTC時間[tpLogical] <- with_tz(tpDateTime,tz="UTC")
+```
+
+
+
+```{r}
+library(readr)
+transcriptDataFinal <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/transcriptDataFinal.csv")
+
+gpa_fun <- function(studentID){
+  transcriptDataFinal$學號==studentID -> logiChosenStudent
+  
+  subSample <- transcriptDataFinal[logiChosenStudent,]
+  
+  sum(subSample$學期成績*subSample$學分數)/
+    sum(subSample$學分數) -> GPA
+  return(GPA)
+}
+```
+
+```{r}
+gpa_fun("479W9ee8e")
+gpa_fun("9efW9aea5")
+```
+
+
+
+ymd_hms_tzChange(input,fromTzone,toTzone)
+
+input: a character. such as "1973-02-21 12:05:22"
+fromTzone: a character. timezone of input.
+toTzone: a character. timeezone of output.
+
+return value: a date time with toTzone expression.
+
+```{r}
+ymd_hms_tzChange("1973-02-21 12:05:22",
+                 "American/New_York",
+                 "Asia/Taipei")
+```
+
+請把以America/New_York時區輸入的時間字串"1973-02-21 12:05:22"，轉成date time class, 再改成Asia/Taipei時間顯示。
+
+```{r}
+library(lubridate)
+ymd_hms("1973-02-21 12:05:22", tz="America/New_York") -> fromDateTime
+with_tz(fromDateTime,tzone="Asia/Taipei") -> toDateTime
+toDateTime
 ```
 
