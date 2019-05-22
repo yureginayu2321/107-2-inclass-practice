@@ -71,8 +71,12 @@ yyyymmdd <- ymd(str_c(yyyy,mm,"01",sep="-"))
 請寫一個函數其名稱為date_convert_twYM，且date_convert_twYM(x)可以把一個民國年月字串物件x轉成date time class的西元年月日物件輸出。
 
 ```{r}
-date_convert_twYM <- function(){
-  x <- ymd_hms(,)}
+date_convert_twYM <- function(x,y=01){
+   yyyy<-as.integer(str_extract(x,"(?<=(民國))[:digit:]+"))+1911
+   mm<-str_extract(x,"[:digit:]+(?=月)")
+   answer<- ymd(str_c(yyyy,mm,"y",sep="-")) 
+return(answer)}
+date_convert_twYM(x,02)
 ```
 
 ```{r}
