@@ -27,11 +27,7 @@ ymd_hms(invoiceList$`訂單時區之下單時間`[nyLogical],
 
 invoiceList$UTC時間[nyLogical] <-
   with_tz(nyDateTime,tzone="UTC")
-```
 
-
-
-```{r}
 ymd_hms(invoiceList$訂單時區之下單時間[tpLogical],
         tz="Asia/Taipei") -> tpDateTime
 
@@ -84,4 +80,122 @@ ymd_hms("1973-02-21 12:05:22", tz="America/New_York") -> fromDateTime
 with_tz(fromDateTime,tzone="Asia/Taipei") -> toDateTime
 toDateTime
 ```
+
+```{r}
+ymd_hms_tzChange <- function(input,fromTzone,toTzone){
+  time1 <- ymd_hms(input,tz=fromTzone)
+  answer <- with_tz(time1,tzone = toTzone)
+  return(answer)
+}
+ymd_hms_tzChange("1973-02-21 12:05:22","America/New_York","Asia/Taipei")
+```
+
+
+```{r}
+(invoiceList$訂單時區=="America/New_York") ->
+  nyLogical
+(invoiceList$訂單時區=="Asia/Taipei") -> 
+  tpLogical
+
+library(lubridate)
+
+ymd_hms_tzChange(
+  invoiceList$`訂單時區之下單時間`[nyLogical],
+  "America/New_York",
+  "UTC") -> invoiceList$UTC時間[nyLogical]
+
+ymd_hms_tzChange(
+  invoiceList$`訂單時區之下單時間`[nyLogical],
+  fromTzone = "America/New_York",
+  toTzone = "UTC") -> invoiceList$UTC時間[nyLogical]
+
+ymd_hms_tzChange(
+  invoiceList$`訂單時區之下單時間`[nyLogical],
+  fromTzone = "America/New_York",
+  toTzone = "UTC"
+)
+
+
+# ymd_hms(invoiceList$`訂單時區之下單時間`[nyLogical],
+#           tz="America/New_York") -> nyDateTime
+# invoiceList$UTC時間[nyLogical] <-
+#   with_tz(nyDateTime,tzone="UTC")
+
+ymd_hms_tzChange(
+  invoiceList$`訂單時區之下單時間`[tpLogical],
+  "Asia/Taipei",
+  "UTC") -> invoiceList$UTC時間[tpLogical]
+
+
+# ymd_hms(invoiceList$訂單時區之下單時間[tpLogical],
+#         tz="Asia/Taipei") -> tpDateTime
+# invoiceList$UTC時間[tpLogical] <- with_tz(tpDateTime,tz="UTC")
+```
+
+```{r}
+ymd_hms_tzChange <- function(input,fromTzone,toTzone){
+  ymd_hms(input,tz=fromTzone) -> fromDateTime 
+  with_tz(fromDateTime,tzone=toTzone) ->toDateTime
+  return(toDateTime) 
+}
+ymd_hms()
+with_tz(tzone)
+```
+
+
+錯誤
+```
+ymd_hms_tzChange <- function(date, TZ1, TZ2){
+  nyDT2 <- ymd_hms("1973-02-21 12:05:22", tz=TZ1)
+  tpDT2 <- with_tz(nyDT2, tz=TZ2)
+  return(tpDT2)
+  }
+```
+
+更正
+```{r}
+ymd_hms_tzChange <- function(date, TZ1, TZ2){
+  nyDT2 <- ymd_hms(date, tz=TZ1)
+  tpDT2 <- with_tz(nyDT2, tzone=TZ2)
+  return(tpDT2)
+  }
+```
+
+## 民國年月
+
+```{r}
+library(stringr)
+sample(99:103,15,replace = T)-> yy
+sample(1:12,15,replace=T)-> mm
+str_c("民國",str_pad(yy,3,"left","0"),"年",mm,"月") -> twDates
+twDates
+```
+
+```{r}
+twDates
+library(stringr); library(lubridate)
+yyyy<-as.integer(str_extract(twDates,"(?<=(民國))[:digit:]+"))+1911
+mm<-str_extract(twDates,"[:digit:]+(?=月)")
+yyyymmdd <- ymd(str_c(yyyy,mm,"01",sep="-"))
+yyyymmdd
+```
+
+
+```{r}
+date_convert_twYM <- function(twDates){
+  #twDates
+  yyyy<-as.integer(str_extract(twDates,"(?<=(民國))[:digit:]+"))+1911
+  mm<-str_extract(twDates,"[:digit:]+(?=月)")
+  yyyymmdd <- ymd(str_c(yyyy,mm,"01",sep="-"))
+  return(yyyymmdd)
+}
+
+```
+
+
+
+
+
+
+
 
