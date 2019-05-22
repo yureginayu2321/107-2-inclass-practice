@@ -14,3 +14,25 @@ col_types = cols(訂單時間.以訂單時區顯示. = col_character()))
 names(invoiceList)[[2]] <- "訂單時區之下單時間"
 ```
 
+```{r}
+(invoiceList$訂單時區=="America/New_York") -> nyLogical
+(invoiceList$訂單時區=="Asia/Taipei") -> tpLogical
+
+invoiceList$nyLogical <- nyLogical
+invoiceList$tpLogical <- tpLogical
+
+library(lubridate)
+ymd_hms(invoiceList$`訂單時區之下單時間`[nyLogical],
+          tz="America/New_York") -> nyDateTime
+
+invoiceList$UTC時間[nyLogical] <-
+  with_tz(nyDateTime,tzone="UTC")
+
+ymd_hms(invoiceList$`訂單時區之下單時間`[tpLogical],
+          tz="Asia/Taipei") -> tpDateTime
+invoiceList$UTC時間[tpLogical] <-
+  with_tz(tpDateTime,tzone="UTC")
+
+invoiceList 
+```
+
