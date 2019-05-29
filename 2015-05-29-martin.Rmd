@@ -128,17 +128,134 @@ supply_fun3(P=2,0,1)
 
 ```{r}
 gpa_fun <- function(studentID){
-  transcriptDataFinal$學號==studentID -> logiChosenStudent
-  
-  subSample <- transcriptDataFinal[logiChosenStudent,]
-  
-  sum(subSample$學期成績*subSample$學分數)/
-    sum(subSample$學分數) -> GPA
-  return(
-    GPA
-  )
+  if(studentID %in% transcriptDataFinal$學號){
+    transcriptDataFinal$學號==studentID -> logiChosenStudent
+    subSample <- transcriptDataFinal[logiChosenStudent,]
+    sum(subSample$學期成績*subSample$學分數)/
+      sum(subSample$學分數) -> GPA
+    return(GPA)
+  } else {
+    message("查無此學號")
+  }
+}
+
+gpa_fun("92aS67fee") # 顯示82.85276
+gpa_fun("aa829838s") # 查無此學號
+```
+
+Error example
+```
+gpa_fun <- function(studentID){
+  if(studentID == transcriptDataFinal$學號){
+    ...
 }
 ```
+
+錯誤條件下法
+```{r}
+"92aS67fee" == transcriptDataFinal$學號
+```
+
+正確條件下法
+```{r}
+"92aS67fee" %in% transcriptDataFinal$學號
+```
+
+
+```{r}
+a <- readline(prompt = "請輸入一個數字： ")
+if(a==1) {
+  print("你輸入了1")
+} else if(a==2) {
+  print("你輸入了2")
+} else if(a==3) {
+  print("你輸入了3")
+} else {
+  print("你輸入了其他數字")
+}
+```
+
+```{r}
+supply_fun4 <- function(P,a,b){
+  Qs <- a+b*P
+  if(P < 0) {
+    message("P不能為負值") # 在螢幕出現的「錯誤」提示，沒有輸出任何值
+  } else if(P < -a/b) {
+    message("P必需大於等於",-a/b,"(即-a/b值)")
+  } else {
+    return(Qs)
+  }
+}
+supply_fun4(P=-1,-3,1)
+supply_fun4(P=2,-3,1)
+supply_fun4(P=3,-3,1)
+```
+
+```{r}
+5 %% 3
+```
+
+
+```{r}
+fizzbuzz <- function(input){
+  zeroRemBy3 <- input %% 3 == 0
+  zeroRemBy5 <- input %% 5 == 0
+  if(zeroRemBy3 & !zeroRemBy5){
+    return("fizz")
+  } else if(zeroRemBy5 & !zeroRemBy3){
+    return("buzz")
+  } else if(zeroRemBy5 & zeroRemBy3){
+    return("fuzzbuzz")
+  } else {
+    message("other situation")
+  }
+}
+```
+
+```{r}
+fizzbuzz(7)
+fizzbuzz(6) 
+fizzbuzz(5) 
+fizzbuzz(15)
+```
+
+```{r}
+fizzbuzz<-function(x){
+  if(x%%3==0&x%%5!=0){
+    print("fizz")
+  }
+  else if(x%%5==0&x%%3!=0){
+    print("buzz")
+  }
+  else if(x%%5==0&x%%3==0){
+    print("fizzbuzz")
+  }
+  else{
+    print(x)
+  }
+}
+```
+
+
+## any all
+
+```{r}
+a <- c(1,3,5)
+a>2 # 此邏輯條件產生三個值
+```
+
+```{r}
+if(a>2) {
+  print("a大於2")
+}
+```
+
+
+
+
+
+
+
 
 
 
