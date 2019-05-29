@@ -28,3 +28,55 @@ textbookURL <- function(){browseURL("https://www.ntpu.edu.tw")}
 textbookURL()
 ```
 
+```{r}
+
+library(readr)
+transcriptDataFinal <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/transcriptDataFinal.csv")
+gpa_fun2 <- function(studentID){
+  transcriptDataFinal$學號==studentID -> logiChosenStudent
+  
+  subSample <- transcriptDataFinal[logiChosenStudent,]
+  
+  sum(subSample$學期成績*subSample$學分數)/
+    sum(subSample$學分數) -> GPA
+  return(
+    list(
+      平均成績=GPA,
+      成績單=subSample
+      )
+  )
+}
+```
+創造一個demand_supply_fun(P,a,b,c,d)，它會輸出一個list包含三個元素：供給量，需求量，超額供給量
+```{r}
+
+
+demand_supply_fun <- function(P,a,b,c,d){
+  supply_fun <- a+b*P
+  demand_fun <- c-d*P
+  more <- supply_fun-demand_fun
+  return(list('供給量'=supply_fun,
+              '需求量'=demand_fun,
+              '超額供給量'=more))
+}
+
+
+```
+
+```{r}
+a <- readline(prompt = "請輸入一個數字： ")
+if(a < 0) {
+  print("a為負值")
+}
+```
+```{r}
+supply_fun2 <- function(P,a,b){
+  Qs <- a+b*P
+  if(P>=0) {
+    return(Qs)
+  }
+}
+supply_fun2(P=-1,0,1)
+supply_fun2(P=2,0,1)
+```
+
