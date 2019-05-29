@@ -1,0 +1,84 @@
+---
+title: '2019-05-29'
+author: "林茂廷"
+date: "5/29/2019"
+output: html_document
+---
+
+```{r}
+library(lubridate)
+
+now2 <- function(){
+  currentDateTime <- Sys.time()
+  hh<-hour(currentDateTime)
+  mm<-minute(currentDateTime)
+  cat("現在是",hh,"點",mm,"分")
+}
+```
+
+```{r}
+now2()
+now2() -> xx
+```
+
+```{r}
+browseURL("https://www.ntpu.edu.tw")
+```
+
+```{r}
+textbookURL<-function(){
+browseURL("https://bookdown.org/tpemartin/ntpu-programming-for-data-science")}
+textbookURL()
+```
+
+## multiple output
+
+```{r}
+library(readr)
+transcriptDataFinal <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/transcriptDataFinal.csv")
+```
+
+```{r}
+gpa_fun2 <- function(studentID){
+  transcriptDataFinal$學號==studentID -> logiChosenStudent
+  
+  subSample <- transcriptDataFinal[logiChosenStudent,]
+  
+  sum(subSample$學期成績*subSample$學分數)/
+    sum(subSample$學分數) -> GPA
+  return(
+    list(
+      平均成績=GPA,
+      成績單=subSample
+      )
+  )
+}
+```
+
+```{r}
+gpa_fun2("92aS67fee") -> outputValue
+outputValue$平均成績
+outputValue$成績單
+```
+
+## demand supply
+
+```{r}
+demand_supply_fun <- function(P,a,b,c,d){
+  Qs<-a+b*P
+  Qd<-c-d*P
+  output <- list(
+      供給量=Qs,
+      需求量=Qd,
+      超額供給量=Qs-Qd
+    )
+  return(
+    output
+  )
+}
+```
+
+```{r}
+demand_supply_fun(1,0,1,10,2)
+```
+
