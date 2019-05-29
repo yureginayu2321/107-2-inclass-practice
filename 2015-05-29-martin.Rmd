@@ -82,3 +82,68 @@ demand_supply_fun <- function(P,a,b,c,d){
 demand_supply_fun(1,0,1,10,2)
 ```
 
+# 條件執行
+
+```{r}
+a <- readline(prompt = "請輸入一個數字： ")
+if(a < 0) {
+  print("a為負值")
+}
+```
+
+```{r}
+supply_fun2 <- function(P,a,b){
+  Qs <- a+b*P
+  if(P>=0) {
+    return(Qs)
+  }
+}
+supply_fun2(P=-1,0,1)
+supply_fun2(P=2,0,1)
+```
+
+
+```{r}
+a <-  readline(prompt = "請輸入一個數字： ")
+if(a < 0) {
+  print("a為負值")
+} else {
+  print("a不為負值")
+}
+```
+
+```{r}
+supply_fun3 <- function(P,a,b){
+  Qs <- a+b*P
+  if(P < 0) {
+    message("P不能為負值") # 在螢幕出現的「錯誤」提示，沒有輸出任何值
+  } else {
+    return(Qs)
+  }
+}
+supply_fun3(P=-1,0,1) -> yy
+supply_fun3(P=2,0,1)
+```
+
+
+```{r}
+gpa_fun <- function(studentID){
+  transcriptDataFinal$學號==studentID -> logiChosenStudent
+  
+  subSample <- transcriptDataFinal[logiChosenStudent,]
+  
+  sum(subSample$學期成績*subSample$學分數)/
+    sum(subSample$學分數) -> GPA
+  return(
+    GPA
+  )
+}
+```
+
+
+
+
+
+
+
+
