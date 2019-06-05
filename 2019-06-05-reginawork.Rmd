@@ -51,7 +51,42 @@ for(i in c(1:5)){
 ```
 ```{r}
 for(i in c(1:5)){
+  print(i)
   print(studentIds5[[i]]) # 
+}
+```
+
+```{r}
+for(i in seq_along(studentIds5)){
+  print(studentIds5[[i]])
+}
+```
+```{r}
+gmailAddress <- c(
+  "tim@gmail.com",
+  "anita",
+  "yellen@gmail.com",
+  "huang@gmail.com"
+)
+```
+任務：一一檢查gmailAddress每個元素，若沒有寫"@gmail.com"則加上。
+
+gmailAddress[[i]]（i=1,…）可一一取出每個gmailAddress元素
+
+請依範例1，練習3種sequence使用法。
+```{r}
+for (i in gmailAddress) {
+  print(i)
+  
+}
+for (i in c(1:4)) {
+  print(gmailAddress[[i]])
+  
+}
+
+for (i in seq_along(gmailAddress)) {
+  print(gmailAddress[[i]])
+  
 }
 ```
 
