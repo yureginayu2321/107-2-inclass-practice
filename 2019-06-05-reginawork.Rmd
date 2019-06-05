@@ -1,0 +1,57 @@
+---
+title: '2019-06-05'
+author: "林茂廷"
+date: "6/5/2019"
+output: html_document
+---
+```{r}
+a <- 3
+
+testfun <- function(x){
+  y <- a/4
+  output <- x*y
+  return(output)
+}
+
+testfun(2)
+
+a <- 4
+testfun(2)
+```
+
+```{r}
+utility_cobb_douglass(1,2,0.5,0.8)
+```
+```{r}
+utility_cobb_douglass(1,2,.beta=0.8,.alpha=0.5)
+```
+```{r}
+load(url("https://github.com/tpemartin/github-data/blob/master/loopTranscriptData.Rda?raw=true"))
+```
+
+```{r}
+studentIds <- unique(transcriptDataFinal$學號) # 全部可能學號
+studentIds5 <- studentIds[1:5]
+studentIds5
+
+```
+```{r}
+gpa_fun(studentIds5[[1]])
+for (i in studentIds5) {
+  print(i
+      )
+  print(studentIds5)
+  
+}
+```
+```{r}
+for(i in c(1:5)){
+  print(i) 
+}
+```
+```{r}
+for(i in c(1:5)){
+  print(studentIds5[[i]]) # 
+}
+```
+
