@@ -1,0 +1,278 @@
+---
+title: "Common mistakes"
+author: "林茂廷"
+date: "6/11/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(lubridate); library(stringr); library(purrr)
+```
+
+
+## 1.2
+```{r}
+homeworkData <- data.frame(
+  姓名=c("小明","小花","小新"),
+  作業1分數=c(10,9,5),
+  作業2分數=c(10,10,9),
+  stringsAsFactors = FALSE
+)
+homeworkData
+```
+
+
+錯
+```{r, eval=FALSE}
+email_content_fun <- function(input){
+  emailText <- str_c("親愛的",homeworkData[["姓名"]],"好，您的作業成績為:","作業1,"homeworkData[["作業1分數"]])
+}
+```
+
+對
+步驟1： 以一個明確的input值完成一個明確的output
+
+```{r}
+input <- homeworkData[1,]
+
+# 源自： "親愛的student好，您的作業成績為：作業1, y1分; 作業2, y2分"
+student <- input$姓名
+y1 <- input$作業1分數
+y2 <- input$作業2分數
+output <- str_c("親愛的",student,"好，您的作業成績為：作業1, ",y1,"分; 作業2, ",y2,"分")
+```
+
+步驟2：
+```
+functionName <- function(input){
+
+return(output)
+}
+```
+
+```{r}
+email_content_fun <- function(input){
+  
+  student <- input$姓名
+  y1 <- input$作業1分數
+  y2 <- input$作業2分數
+  output <- str_c("親愛的",student,"好，您的作業成績為：作業1, ",y1,"分; 作業2, ",y2,"分")
+  
+  return(output)
+}
+```
+
+```{r}
+email_content_fun(homeworkData[3,])
+```
+
+
+# 2
+
+```{r}
+## ----ans2f---------------------------------------------------------------
+# str_smallClosest
+str_smallCloset <- function(chrNumber, criticalNumber){
+  # 找出criticalNumber中的最大值maxnumber
+  max(criticalNumber)->maxnumber
+  
+  # 找出chrNumber中小於等於maxnumber中最大的值
+  (as.numeric(chrNumber) <= maxnumber) -> logichrNumber # 字串不能跟數字比
+  number<-max(chrNumber[logichrNumber])
+  
+  # 回傳
+  return(as.character(number))
+}
+```
+
+# 3.1
+
+```{r}
+EconCourseSelectionInfo <- list(
+  "101"="http://www.econ.ntpu.edu.tw/econ/files/Way/2016072195021.doc",
+  "104"="http://www.econ.ntpu.edu.tw/econ/files/Way/2016072195041.doc",
+  "105"="http://www.econ.ntpu.edu.tw/econ/files/Way/20170516144353.doc",
+  "107"="http://www.econ.ntpu.edu.tw/econ/files/Way/20180518121643.pdf"
+)
+#EconCourseSelectionInfo[["104"]]$url
+```
+
+```{r}
+EconCourseSelectionInfo[["104"]]
+```
+
+# 3.2
+
+```{r}
+# input
+entranceYear <- 99
+EconCourseSelectionInfo <- EconCourseSelectionInfo
+
+# output
+(entranceYear < 101)
+"很抱歉沒有您入學年的資訊，請打系辦電話"
+```
+
+
+```{r}
+# input
+entranceYear <- 102
+EconCourseSelectionInfo <- EconCourseSelectionInfo
+
+# output
+(entranceYear >=101 & entranceYear < 104)
+EconCourseSelectionInfo[["101"]]
+```
+
+```{r}
+# input
+entranceYear <- 108
+EconCourseSelectionInfo <- EconCourseSelectionInfo
+
+# output
+(entranceYear >= 107)
+EconCourseSelectionInfo[["107"]]
+```
+
+列出所有情境：
+```{r}
+# output
+(entranceYear < 101)
+"很抱歉沒有您入學年的資訊，請打系辦電話"
+
+# output
+(entranceYear >=101 & entranceYear < 104)
+EconCourseSelectionInfo[["101"]]
+
+# output
+(entranceYear == 104)
+EconCourseSelectionInfo[["104"]]
+
+# output
+(entranceYear >=105 & entranceYear <107)
+EconCourseSelectionInfo[["105"]]
+
+# output
+(entranceYear >= 107)
+EconCourseSelectionInfo[["107"]]
+```
+
+寫成依條件執行
+```{r}
+# output
+if(entranceYear < 101){
+  return("很抱歉沒有您入學年的資訊，請打系辦電話")
+} else if(entranceYear >=101 & entranceYear < 104){
+  return(EconCourseSelectionInfo[["101"]])
+} else if(entranceYear == 104){
+  return(EconCourseSelectionInfo[["104"]]) 
+} else if(entranceYear >=105 & entranceYear <107){
+  return(EconCourseSelectionInfo[["105"]])
+} else if(entranceYear >= 107){
+  return(EconCourseSelectionInfo[["107"]])
+} else {
+  warning("輸入數字有錯")
+}
+```
+
+寫成function
+```{r}
+search_courseRules <- function(entranceYear,EconCourseSelectionInfo){
+  if(!is.integer(entranceYear) | !is.numeric(entranceYear)){
+    warning("輸入有誤")
+  } else{
+  
+    if(entranceYear < 101){
+      return("很抱歉沒有您入學年的資訊，請打系辦電話")
+    } else if(entranceYear >=101 & entranceYear < 104){
+      return(EconCourseSelectionInfo[["101"]])
+    } else if(entranceYear == 104){
+      return(EconCourseSelectionInfo[["104"]]) 
+    } else if(entranceYear >=105 & entranceYear <107){
+      return(EconCourseSelectionInfo[["105"]])
+    } else if(entranceYear >= 107){
+      return(EconCourseSelectionInfo[["107"]])
+    } 
+      
+  }
+}  
+```
+
+```{r}
+search_courseRules(99,EconCourseSelectionInfo)
+search_courseRules(101,EconCourseSelectionInfo)
+search_courseRules(100.5,EconCourseSelectionInfo)
+search_courseRules(107,EconCourseSelectionInfo)
+search_courseRules(109,EconCourseSelectionInfo)
+```
+
+
+```{r}
+#search_courseRules <- function(entranceYear,EconCourseSelectionInfo){
+  
+  
+  if (entranceYear <= 104) {
+    EconCourseSelectionInfo="http://www.econ.ntpu.edu.tw/econ/files/Way/2016072195021.doc"
+  } else if(entranceYear<=105){
+    EconCourseSelectionInfo="http://www.econ.ntpu.edu.tw/econ/files/Way/2016072195041.doc"
+  } else if(entranceYear<=106){
+    EconCourseSelectionInfo="http://www.econ.ntpu.edu.tw/econ/files/Way/20170516144353.doc"
+  } else if(entranceYear<=108){
+    EconCourseSelectionInfo="http://www.econ.ntpu.edu.tw/econ/files/Way/20180518121643.pdf"
+  } else {
+    print("很抱歉沒有您入學年的資訊，請打系辦電話")
+  } 
+
+#}
+#search_courseRules
+```
+
+# 3.3
+
+```{r}
+str_smallClosest <- function(chrNumber,criticalNumber){
+  as.numeric(chrNumber) -> numNumber
+  logiTrue <- numNumber <= criticalNumber
+  max(numNumber[(numNumber <= criticalNumber)]) -> maxNum
+  return(as.character(maxNum))
+}
+EconCourseSelectionInfo <- list(
+    "101"=list(
+      url="http://www.econ.ntpu.edu.tw/econ/files/Way/2016072195021.doc"
+    ),
+    "104"=list(
+      url="http://www.econ.ntpu.edu.tw/econ/files/Way/2016072195041.doc"
+    ),
+    "105"=list(
+      url="http://www.econ.ntpu.edu.tw/econ/files/Way/20170516144353.doc"
+    ),
+    "107"=list(
+      url="http://www.econ.ntpu.edu.tw/econ/files/Way/20180518121643.pdf"
+    )
+)
+#search_courseRules_flexible <- function(entranceYear,courseSelectionInfo){
+
+entranceYear <- 103
+courseSelectionInfo <- EconCourseSelectionInfo
+  
+  names(courseSelectionInfo) -> ruleYears # 取出各頒佈年
+  ruleYears
+  ## 以下借用第2題答案但小修改
+  str_smallClosest(ruleYears,entranceYear) -> maxNumChr
+  
+  ## 
+  courseSelectionInfo[[maxNumChr]]$url
+  
+  if(any(logiTrue)){
+    max(numNumber[logiTrue]) -> maxNum
+    return(courseSelectionInfo[[as.character(maxNum)]]$url)
+  } else {
+    return("很抱歉沒有您入學年的資訊，請打系辦電話")
+  }
+#}
+```
+
