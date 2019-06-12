@@ -1,0 +1,143 @@
+---
+title: '2019-06-12'
+author: "林茂廷"
+date: "06/12/2019"
+output: html_document
+---
+
+
+```{r}
+load(url("https://www.dropbox.com/s/duh5aaqgl2f5m3z/loopTranscriptData.Rda?raw=1"))
+studentIds <- unique(transcriptDataFinal$學號) # 全部可能學號
+studentIds5 <- studentIds[1:5] # 前5筆學號
+```
+
+```{r}
+length(studentIds5)
+1:length(studentIds5)
+```
+
+```{r}
+i <- 1
+print(studentIds5[[i]])
+
+for (i in seq_along(studentIds5)) {
+  print(studentIds5[[i]])
+  
+}
+```
+```{r}
+gmailAddress <- c(
+  "tim@gmail.com",
+  "anita",
+  "yellen@gmail.com",
+  "huang@gmail.com"
+)
+```
+任務：檢查gmailAddress中「每個」元素，若沒有寫“@gmail.com”則加上。
+
+Sequence source是什麼？
+
+完成以下body程序：
+
+令i <- 1，檢查gmailAddress中「第i個」元素，若沒有寫“@gmail.com”則加上。
+
+完成for loop任務：檢查gmailAddress中「每個」元素，若沒有寫“@gmail.com”則加上。
+```{r}
+i <- 1
+print(gmailAddress[[i]])
+
+
+for (i in seq_along(gmailAddress)) {
+  if(str_detect(gmailAddress,"gmail.com"))
+    {print(gmailAddress[[i]])
+  }
+  else{
+    print(str_c(gmailAddress[[i]],"@gmail.com"))}
+  
+  
+}
+```
+```{r}
+load(url("https://www.dropbox.com/s/qnz9paigf61yjus/commitHistory.Rda?raw=1"))
+```
+存下來每個commit的author。
+sequence source
+```{r}
+commitHistory
+```
+body
+```{r}
+i <- 1
+commitHistory[[i]]$commit$author -> a
+a
+```
+
+for loop
+```{r}
+
+for (i in seq_along(commitHistory)) {
+  
+  print(commitHistory[[i]]$commit$author$name)
+  print(commitHistory[[i]]$commit$committer$name)
+  
+}
+```
+```{r}
+i <- 1
+same <- (commitHistory[[i]]$commit$author$name==commitHistory[[i]]$commit$committer$name)
+print(same)
+
+for (i in seq_along(commitHistory)) {
+ same <- (commitHistory[[i]]$commit$author$name==commitHistory[[i]]$commit$committer$name)
+print(same)
+  
+}
+```
+
+```{r}
+saveGPA5 <- vector("numeric",length(studentIds5)
+                  )
+for (i in seq_along(studentIds5)) {
+  saveGPA5[[i]] <- gap_fun(studentIds5[[i]])
+  
+}
+```
+```{r}
+saveCommitAuthor <-
+  vector("character",length(commitHistory)) # 0.
+for(i in seq_along(commitHistory)){
+  commitHistory[[i]]$commit$author$name -> saveCommitAuthor[[i]]
+}
+
+saveCommitAuthor
+```
+
+```{r}
+save1 <- vector("character",length(commitHistory))
+save2 <- vector("character",length(commitHistory))
+
+for (i in seq_along(commitHistory)) {
+  
+  save1[[i]] <- commitHistory[[i]]$commit$author$name
+  save2[[i]] <- commitHistory[[i]]$commit$committer$name
+  
+}
+save1
+save2
+```
+
+```{r}
+if
+{save1==save2
+```
+
+
+
+
+
+
+
+
+
+
