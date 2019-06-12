@@ -9,3 +9,88 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Sequence
+
+```{r}
+load(url("https://www.dropbox.com/s/duh5aaqgl2f5m3z/loopTranscriptData.Rda?raw=1"))
+studentIds <- unique(transcriptDataFinal$學號) # 全部可能學號
+studentIds5 <- studentIds[1:5] # 前5筆學號
+```
+
+```{r}
+studentIds5
+seq_along(studentIds5)
+```
+
+```{r}
+length(studentIds5)
+1:length(studentIds5)
+```
+
+# 範例一
+
+任務：針對studentIds5裡的「每一個」學號進行print()。
+
+## sequence source
+```{r}
+studentIds5
+```
+
+## body 
+把任務定義在對「第i個」
+任務：針對studentIds5裡的「第i個」學號進行print()。
+```{r}
+i <- 1
+
+print(studentIds5[[i]])
+```
+
+## for loop 
+
+使用以下for loop模式，完成對「每個」的任務。
+for(i in seq_along(sequence_source)){
+  body
+}
+```{r}
+for(i in seq_along(studentIds5)){
+  print(studentIds5[[i]])
+}
+```
+
+# 範例2：
+
+```{r}
+gmailAddress <- c(
+  "tim@gmail.com",
+  "anita",
+  "yellen@gmail.com",
+  "huang@gmail.com"
+)
+```
+
+任務：檢查gmailAddress「每個」元素，若沒有寫“@gmail.com”則加上。
+
+## sequence source
+
+## body
+任務：檢查gmailAddress「第i個」元素(令i<-1)，若沒有寫“@gmail.com”則加上。
+
+## for loop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
