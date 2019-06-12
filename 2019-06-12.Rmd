@@ -304,3 +304,43 @@ saveGPA5
 
 ## 練習
 
+任務一：存下來每個commit的author。
+
+```{r}
+load(url("https://www.dropbox.com/s/qnz9paigf61yjus/commitHistory.Rda?raw=1"))
+```
+
+### 0. saving container
+```{r}
+saveCommitAuthor <-
+  vector("character",length(commitHistory))
+```
+
+### 1. sequence source
+```{r}
+commitHistory
+```
+
+### 2. body
+存下來「第i個」commit的author。
+```{r}
+i<- 1
+
+commitHistory[[i]]$commit$author$name -> saveCommitAuthor[[i]]
+```
+
+```{r}
+saveCommitAuthor
+```
+
+### 3. for loop
+```{r}
+saveCommitAuthor <-
+  vector("character",length(commitHistory)) # 0.
+for(i in seq_along(commitHistory)){
+  commitHistory[[i]]$commit$author$name -> saveCommitAuthor[[i]]
+}
+
+saveCommitAuthor
+```
+
