@@ -203,13 +203,104 @@ for(i in seq_along(commitHistory)){
 ```
 
 
+# Output
+
+```{r}
+saveCharacter <- vector("character",5)
+saveCharacter
+```
+```{r}
+saveNumeric <- vector("numeric",5)
+saveNumeric
+```
+```{r}
+saveLogical <- vector("logical",5)
+saveLogical
+```
+
+```{r}
+saveList <- vector("list",5)
+saveList
+```
+```{r}
+# 把"你好"存在saveCharacter第3個位置
+saveCharacter # 儲存前
+saveCharacter[[3]] <- "你好"
+saveCharacter # 儲存後
+```
+
+```{r}
+# 把 72.3 存在saveNumeric第3個位置
+saveNumeric # 儲存前
+saveNumeric[[3]] <- 72.3
+saveNumeric # 儲存後
+```
+
+```{r}
+# 把 TRUE 存在saveLogical第3個位置
+saveLogical # 儲存前
+saveLogical[[3]] <- TRUE
+saveLogical # 儲存後
+```
+
+```{r}
+# 把 list(姓名="小明",電話="02-86741111") 存在saveList第3個位置
+saveList # 儲存前
+saveList[[3]] <- list(姓名="小明",電話="02-86741111")
+saveList # 儲存後
+```
 
 
+## 範例3 
 
+```{r}
+load(url("https://www.dropbox.com/s/duh5aaqgl2f5m3z/loopTranscriptData.Rda?raw=1"))
+studentIds <- unique(transcriptDataFinal$學號) # 全部可能學號
+studentIds5 <- studentIds[1:5] # 前5筆學號
+```
 
+任務: 將transcriptDataFinal資料中[每個]學號的平均成績算出來並儲存
 
+### 0. Saving container
+平均成績 is numeric
 
+```{r}
+saveGPA5 <- vector("numeric", length(studentIds5))
+saveGPA5
+```
 
+### 1. sequence source
+```{r}
+studentIds5
+```
 
+### 2. body
+資料中[第i個]學號的平均成績算出來並儲存
 
+```{r}
+i <- 1
+
+gpa_fun(studentIds5[[i]]) -> saveGPA5[[i]]
+```
+
+```{r}
+saveGPA5
+```
+
+### 3. for loop
+```{r}
+saveGPA5 <- vector("numeric", length(studentIds5))
+for(i in seq_along(studentIds5)){
+  gpa_fun(studentIds5[[i]]) -> saveGPA5[[i]]
+}
+
+saveGPA5
+```
+
+```{r}
+names(saveGPA5) <- studentIds5
+saveGPA5
+```
+
+## 練習
 
