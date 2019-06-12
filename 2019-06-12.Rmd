@@ -344,3 +344,75 @@ for(i in seq_along(commitHistory)){
 saveCommitAuthor
 ```
 
+
+任務三：存下來每個author與committer同人的commitDate。
+
+過渡任務：
+存下來每個commit的author, committer, commitDate.
+存下來每個commit的author==commiter的結果
+### 0. saving container
+```{r}
+saveEveryThing <- vector("list",length(commitHistory))
+saveSameLogi <- vector("logical",length(commitHistory))
+```
+
+### 1. sequence source
+```{r}
+commitHistory
+```
+
+### 2. body
+```{r}
+i <- 1
+
+author_i <- commitHistory[[i]]$commit$author$name
+committer_i <- commitHistory[[i]]$commit$committer$name
+commitDate_i <- commitHistory[[i]]$commit$committer$date
+
+(author_i==committer_i) -> saveSameLogi[[i]]
+list(
+  author=author_i,
+  committer=committer_i,
+  commitDate=commitDate_i
+) -> saveEveryThing[[i]]
+```
+
+檢查一下
+```{r}
+saveEveryThing
+saveSameLogi
+```
+
+### 3. for loop
+```{r}
+saveEveryThing <- vector("list",length(commitHistory))
+saveSameLogi <- vector("logical",length(commitHistory))
+for(i in seq_along(commitHistory)){
+  author_i <- commitHistory[[i]]$commit$author$name
+  committer_i <- commitHistory[[i]]$commit$committer$name
+  commitDate_i <- commitHistory[[i]]$commit$committer$date
+  
+  (author_i == committer_i) -> saveSameLogi[[i]]
+  
+  list(
+    author=author_i,
+    committer=committer_i,
+    commitDate=commitDate_i
+  ) -> saveEveryThing[[i]]  
+}
+```
+
+```{r}
+saveEveryThing
+```
+
+```{r}
+print(saveSameLogi)
+```
+
+
+```{r}
+saveEveryThing[saveSameLogi] -> saveValidCommitDate
+saveValidCommitDate
+```
+
