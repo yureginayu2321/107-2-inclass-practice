@@ -128,9 +128,20 @@ cat("修正後狀況\n")
 gmailAddress
 ```
 
+# Commit history
 
+```{r}
+load(url("https://www.dropbox.com/s/qnz9paigf61yjus/commitHistory.Rda?raw=1"))
+```
 
+任務0：print「每個」commit的author。
 
+## sequence source
+
+## body
+print「第i個」commit的author。
+
+## for loop
 
 
 
