@@ -182,8 +182,8 @@ if(entranceYear < 101){
 寫成function
 ```{r}
 search_courseRules <- function(entranceYear,EconCourseSelectionInfo){
-  if(!is.integer(entranceYear) | !is.numeric(entranceYear)){
-    warning("輸入有誤")
+  if(as.integer(entranceYear)!=entranceYear | !is.numeric(entranceYear)){
+    warning("輸入有誤\n")
   } else{
   
     if(entranceYear < 101){
