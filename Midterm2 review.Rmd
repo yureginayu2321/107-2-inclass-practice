@@ -1,0 +1,183 @@
+---
+title: "Midterm2 review"
+author: "林茂廷"
+date: "6/16/2019"
+output: html_document
+---
+
+# 2
+
+```{r}
+c("10","25","11") -> chrNumber
+12 -> criticalNumber
+chrNumber
+criticalNumber
+```
+```{r}
+as.numeric(chrNumber) -> numNumber # 將character物件chrNumber轉成numeric物件numNumber
+
+chrNumber
+numNumber
+```
+
+```{r}
+logiTrue <- numNumber <= criticalNumber # numNumber中小於等於criticalNumber的元素logic判斷值
+
+numNumber
+logiTrue
+```
+
+```{r}
+max(numNumber[logiTrue]) -> maxNum # 自numNumber中取出logiTrue為TRUE的值，找出當中最大的存在maxNum
+numNumber
+numNumber[logiTrue]
+max(numNumber[logiTrue])
+```
+
+```{r}
+str_smallClosest <- function(chrNumber,criticalNumber){
+  as.numeric(chrNumber) -> numNumber # 將character物件chrNumber轉成numeric物件numNumber
+  logiTrue <- numNumber <= criticalNumber # numNumber中小於等於criticalNumber的元素logic判斷值
+  max(numNumber[logiTrue]) -> maxNum # 自numNumber中取出logiTrue為TRUE的值，找出當中最大的存在maxNum
+  return(as.character(maxNum)) # 將maxNum轉成character回傳
+}
+```
+
+```{r}
+str_smallClosest(c("105","101","99"),100)
+```
+
+# 3
+
+## 3.1
+
+```{r}
+EconCourseSelectionInfo <- list(
+    "101"=list(
+      url="http://www.econ.ntpu.edu.tw/econ/files/Way/2016072195021.doc"
+    ),
+    "104"=list(
+      url="http://www.econ.ntpu.edu.tw/econ/files/Way/2016072195041.doc"
+    ),
+    "105"=list(
+      url="http://www.econ.ntpu.edu.tw/econ/files/Way/20170516144353.doc"
+    ),
+    "107"=list(
+      url="http://www.econ.ntpu.edu.tw/econ/files/Way/20180518121643.pdf"
+    )
+  )
+```
+
+
+```{r}
+EconCourseSelectionInfo[["104"]]$url == "http://www.econ.ntpu.edu.tw/econ/files/Way/2016072195041.doc"
+```
+
+## 3.2
+
+
+```{r}
+
+
+if(entranceYear %in% c(101,102,103)){# 適用101文件的條件：entranceYear 101, 102, 103
+  output <- EconCourseSelectionInfo[["101"]]$url
+} else if(entranceYear==104) {# 適用104文件的條件：entranceYear 104
+  output <- EconCourseSelectionInfo[["104"]]$url
+} else if(entranceYear %in% c(105,106)){# 適用105文件的條件: entranceYear 105, 106
+  output <- EconCourseSelectionInfo[["105"]]$url
+} else if(entranceYear >= 107){# 適用107文件的條件: entranceYear >=107
+  output <- EconCourseSelectionInfo[["107"]]$url
+} else {# entranceYear < 101 沒答案，要找系辦
+  output <- "很抱歉沒有您入學年的資訊，請打系辦電話"
+}
+```
+
+
+
+```{r}
+search_courseRules <- function(entranceYear,EconCourseSelectionInfo){
+
+  if(entranceYear %in% c(101,102,103)){# 適用101文件的條件：entranceYear 101, 102, 103
+    output <- EconCourseSelectionInfo[["101"]]$url
+  } else if(entranceYear==104) {# 適用104文件的條件：entranceYear 104
+    output <- EconCourseSelectionInfo[["104"]]$url
+  } else if(entranceYear %in% c(105,106)){# 適用105文件的條件: entranceYear 105, 106
+    output <- EconCourseSelectionInfo[["105"]]$url
+  } else if(entranceYear >= 107){# 適用107文件的條件: entranceYear >=107
+    output <- EconCourseSelectionInfo[["107"]]$url
+  } else {# entranceYear < 101 沒答案，要找系辦
+    output <- "很抱歉沒有您入學年的資訊，請打系辦電話"
+  }
+
+  return(output)
+}
+```
+
+
+## 3.3
+
+search_courseRules_flexible(entranceYear,courseSelectionInfo)
+
+```{r}
+# 設定測試input值
+entranceYear <- 103
+courseSelectionInfo <- EconCourseSelectionInfo
+
+# 1. 從courseSelectionInfo裡可得到文件頒佈學年
+names(courseSelectionInfo) -> ruleYears
+# 2. 再從這些文件學年找出那些是在entranceYear之前頒佈的
+as.numeric(ruleYears) -> numNumber
+numNumber <= entranceYear -> logiTrue
+if(any(logiTrue)){
+  # 3. 符合上述條件的文件裡，選出頒佈學年最近的一份回傳其url
+  # numNumber[logiTrue] #符合上述條件的文件學年
+  max(numNumber[logiTrue]) -> maxNum #選出頒佈學年最近的一份
+  courseSelectionInfo[[as.character(maxNum)]]$url -> output
+} else {
+  output <- "很抱歉沒有您入學年的資訊，請打系辦電話"
+}
+```
+
+```{r}
+search_courseRules_flexible <- function(entranceYear,courseSelectionInfo){
+  
+  # 1. 從courseSelectionInfo裡可得到文件頒佈學年
+  names(courseSelectionInfo) -> ruleYears
+  # 2. 再從這些文件學年找出那些是在entranceYear之前頒佈的
+  as.numeric(ruleYears) -> numNumber
+  numNumber <= entranceYear -> logiTrue
+  if(any(logiTrue)){
+    # 3. 符合上述條件的文件裡，選出頒佈學年最近的一份回傳其url
+    # numNumber[logiTrue] #符合上述條件的文件學年
+    max(numNumber[logiTrue]) -> maxNum #選出頒佈學年最近的一份
+    courseSelectionInfo[[as.character(maxNum)]]$url -> output
+  } else {
+    output <- "很抱歉沒有您入學年的資訊，請打系辦電話"
+  }  
+  
+  return(output)
+}
+```
+
+```{r}
+search_courseRules_flexible(102,EconCourseSelectionInfo)
+```
+
+
+
+```{r}
+ruleYears
+logiTrue
+
+
+```
+
+
+
+
+
+
+
+
+
+
